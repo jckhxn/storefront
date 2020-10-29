@@ -48,7 +48,7 @@ function SigninScreen(props) {
           </input>
         </li>
         <li>
-          <button type="submit" className="button primary">Signin</button>
+          <button type="submit" className="button primary">Sign In</button>
         </li>
         <li>
           New to Rossville Race Parts?

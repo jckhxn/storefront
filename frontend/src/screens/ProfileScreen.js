@@ -12,6 +12,7 @@ function ProfileScreen(props) {
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
+  console.log(userInfo);
   const handleLogout = () => {
     dispatch(logout());
     props.history.push("/signin");
@@ -82,6 +83,7 @@ function ProfileScreen(props) {
         </form>
       </div>
     </div>
+  
     <div className="profile-orders content-margined">
     <h1>Previous Orders</h1>
       {

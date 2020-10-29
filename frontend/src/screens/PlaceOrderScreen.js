@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 function PlaceOrderScreen(props) {
-
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
   const cart = useSelector(state => state.cart);
   const orderCreate = useSelector(state => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
@@ -18,9 +19,18 @@ function PlaceOrderScreen(props) {
   }
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  let discount = null;
   const taxPrice = 0.04 * itemsPrice;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+  let totalPrice = itemsPrice + shippingPrice + taxPrice;
+  
+  if(userInfo.coupon)
+  {
+    // Sets discount coupon if there is one.
+    discount = userInfo.coupon;
+    const discountTotalPrice =  totalPrice - (totalPrice * discount / 100);
+    totalPrice = discountTotalPrice;
 
+  }
   const dispatch = useDispatch();
 
   const placeOrderHandler = () => {
@@ -112,6 +122,9 @@ function PlaceOrderScreen(props) {
             <div>Items</div>
             <div>${itemsPrice}</div>
           </li>
+          {discount? <li> <div>Discount</div>
+          <div>{userInfo.coupon}</div> </li>: null}
+
           <li>
             <div>Shipping</div>
             <div>${shippingPrice}</div>

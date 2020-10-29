@@ -15,6 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import UsersScreen from './screens/UsersScreen';
 import header from './img/header.jpg'
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -54,6 +55,7 @@ function App() {
                   <li>
                     <Link to="/orders">Orders</Link>
                     <Link to="/products">Products</Link>
+                    <Link to="/users">Users</Link>
                   </li>
                 </ul>
               </div>
@@ -67,16 +69,17 @@ function App() {
           </button>
           <ul className="categories">
             <li>
-              <Link to="/category/Pants">Parts</Link>
+              <Link to="/category/Cat1">Parts</Link>
             </li>
 
             <li>
-              <Link to="/category/Shirts">Other</Link>
+              <Link to="/category/Cat2">Other</Link>
             </li>
           </ul>
         </aside>
         <main className="main">
           <div className="content">
+            <Route path="/users" component={UsersScreen}/>
             <Route path="/success" component={SuccessScreen}/>
             <Route path="/orders" component={OrdersScreen} />
             <Route path="/profile" component={ProfileScreen} />

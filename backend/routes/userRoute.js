@@ -35,8 +35,10 @@ router.post('/signin', async (req, res) => {
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
+      coupon:signinUser.coupon,
       token: getToken(signinUser),
     });
+    console.log(signinUser);
   } else {
     res.status(401).send({ message: 'Invalid Email or Password.' });
   }
