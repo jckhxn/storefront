@@ -368,7 +368,9 @@ th {
 tbody > tr:nth-child(odd) {
   background-color: #f0f0f0;
 }
-
+.table button {
+  
+}
 /* Checkout Steps */
 
 .checkout-steps {

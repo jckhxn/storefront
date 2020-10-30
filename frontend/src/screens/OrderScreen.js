@@ -3,9 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createOrder, detailsOrder, payOrder } from '../actions/orderActions';
 import PaypalButton from '../components/PaypalButton';
+
 function OrderScreen(props) {
-  const cart = useSelector(state => state.cart);
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
+  let discount = null;
   
+  if(userInfo.coupon)
+  {
+    // Sets discount coupon if there is one.
+    discount = userInfo.coupon;
+    
+
+  }
+
+  const cart = useSelector(state => state.cart);
+
+  const { cartItems, shipping, payment } = cart;
   const orderPay = useSelector(state => state.orderPay);
   const { loading: loadingPay, success: successPay, error: errorPay } = orderPay;
   const dispatch = useDispatch();
@@ -112,6 +126,8 @@ function OrderScreen(props) {
               <div>Items</div>
               <div>${order.itemsPrice}</div>
             </li>
+            {discount? <li> <div>Discount</div>
+          <div>{userInfo.coupon}%</div> </li>: null}
             <li>
               <div>Shipping</div>
               <div>${order.shippingPrice}</div>

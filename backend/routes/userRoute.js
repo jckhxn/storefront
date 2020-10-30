@@ -15,6 +15,7 @@ router.get('/list',async (req,res) => {
  }
   
   })
+
 router.put('/:id', isAuth, async (req, res) => {
   const userId = req.params.id;
   const user = await User.findById(userId);
@@ -22,6 +23,7 @@ router.put('/:id', isAuth, async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.password = req.body.password || user.password;
+    user.coupon = req.body.coupon || user.coupon;
     const updatedUser = await user.save();
     res.send({
       _id: updatedUser.id,

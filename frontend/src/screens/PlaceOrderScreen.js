@@ -123,7 +123,7 @@ function PlaceOrderScreen(props) {
             <div>${itemsPrice}</div>
           </li>
           {discount? <li> <div>Discount</div>
-          <div>{userInfo.coupon}</div> </li>: null}
+          <div>{userInfo.coupon}%</div> </li>: null}
 
           <li>
             <div>Shipping</div>
