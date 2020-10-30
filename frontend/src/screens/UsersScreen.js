@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import {setUserCoupon} from '../actions/userActions';
 import { useDispatch ,useSelector} from 'react-redux';
+import { Redirect } from "react-router-dom";
 function UsersScreen() {
  
   const [modalVisible, setModalVisible] = useState(false);
@@ -10,6 +11,7 @@ function UsersScreen() {
   const [coupon, setCoupon] = useState('');
   const [users,setUsers] = useState([]);
   const [editUser, setEditUser] = useState('');
+  
   const dispatch = useDispatch();
   useEffect( () => {
     const fetchData = async () => {
@@ -37,6 +39,7 @@ function UsersScreen() {
   // users.map(user => console.log(user.isAdmin));
   return (
     <div>
+      {userInfo.isAdmin ? null:<Redirect to='/'/>}
       <h1>Users and a way to modify them.</h1>
            
       <table className="table">
