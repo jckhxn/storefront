@@ -1,9 +1,20 @@
 import express from 'express';
 import User from '../models/userModel';
-import { getToken, isAuth } from '../util';
+import { getToken, isAuth, isAdmin } from '../util';
 
 const router = express.Router();
 
+
+router.get('/list',async (req,res) => {
+  const users = await User.find({});
+ if(users)
+ { 
+  
+   
+  res.send({users})
+ }
+  
+  })
 router.put('/:id', isAuth, async (req, res) => {
   const userId = req.params.id;
   const user = await User.findById(userId);
