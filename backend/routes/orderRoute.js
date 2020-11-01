@@ -7,6 +7,12 @@ require("dotenv").config({ path: "../../.env" });
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 router.post("/price", async (req, res) => {
+ if(req.body.unitAmount===null)
+ {
+   console.log("received null");
+ }
+ else 
+ {
   try{
   const priceID = await stripe.prices.create({
     unit_amount: req.body.unitAmount,
@@ -20,13 +26,10 @@ router.post("/price", async (req, res) => {
   }
 }
 catch(error) {
-  const priceID = await stripe.prices.create({
-    unit_amount: 0,
-    currency: req.body.currency,
-    product: req.body.product,
-  });
+
   console.log(error.message);
 }
+ }
 }
 );
 router.get("/config", async (req, res) => {

@@ -1,5 +1,7 @@
 # TODO
 # Redux for payment info.
+# Stripe button doesn't work on live site.
+# Change "Test Product"
 # Reorganize order flow - provide Stripe clear order/customer details.
   * Maybe ref the order number in Storefront dashboard.
 # Set redirect URLs correctly Checkout/Cancel
