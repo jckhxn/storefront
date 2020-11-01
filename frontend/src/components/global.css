@@ -50,11 +50,11 @@
     flex-direction: row;
     width: 100%;
     max-width: 980px;
-    padding: 48px;
+    /* padding: 48px; */
     align-content: center;
     justify-content: center;
     height: auto;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 0 auto;
   }
   .sr-header {
@@ -71,9 +71,9 @@
     height: 100%;
     align-self: center;
   }
-  .sr-main {
-    width: var(--form-width);
-  }
+  /* .sr-main {
+    /* width: var(--form-width); 
+  } */
   .sr-content {
     padding-left: 48px;
   }
@@ -267,7 +267,7 @@
     color: white;
     border: 0;
     padding: 12px 16px;
-    margin-top: 16px;
+    /* margin-top: 16px; */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -315,7 +315,7 @@
     .sr-root {
       flex-direction: column;
       justify-content: flex-start;
-      padding: 48px 20px;
+      /* padding: 48px 20px; */
       min-width: 320px;
     }
   
@@ -455,11 +455,11 @@
   .container {
     /* border: 1px solid #e8e8e8;
     border-radius: 6px; */
-    padding: 32px 28px;
+    /* padding: 32px 28px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 400px;
+    /* max-width: 400px; */
   }
   
   .container .pasha-image-stack {

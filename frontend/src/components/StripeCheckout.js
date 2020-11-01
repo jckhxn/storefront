@@ -100,6 +100,10 @@ const StripeCheckout = () => {
   // Redux.
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
+  
+  const priceFixed = order.totalPrice * 100;
+  fetchPriceID(priceFixed);
+      
   const [state, dispatch] = useReducer(reducer, {
     quantity: 1,
     price: null,
@@ -123,12 +127,9 @@ const StripeCheckout = () => {
         payload: { unitAmount, currency, stripe: await loadStripe(publicKey) },
       });
     }
-    // console.log(order.totalPrice * 100);
-    //  o_o I made a hot fix.
-    
-    fetchPriceID(orderDetails.totalPrice * 100); 
+
       
-   
+
     fetchConfig();
   }, []);
 
@@ -154,9 +155,9 @@ const StripeCheckout = () => {
   return (
     <div className="sr-root">
       <div className="sr-main">
-        <header className="sr-header">
-          {/* <div className="sr-header__logo"></div> */}
-        </header>
+        {/* <header className="sr-header">
+          <div className="sr-header__logo"></div>
+        </header> */}
         <section className="container">
           {/* <div>
             <h1>Single photo</h1>

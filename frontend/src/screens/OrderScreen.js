@@ -115,9 +115,10 @@ function OrderScreen(props) {
             <li className="placeorder-actions-payment">
               {loadingPay && <div>Finishing Payment...</div>}
               {!order.isPaid &&
-                <PaypalButton
-                  amount={order.totalPrice}
-                  onSuccess={handleSuccessPayment} />
+                // <PaypalButton
+                //   amount={order.totalPrice}
+                //   onSuccess={handleSuccessPayment} />
+                <StripeCheckout/>
               }
             </li>
             <li>
@@ -148,7 +149,7 @@ function OrderScreen(props) {
         </div>
 
       </div>
-              <StripeCheckout/>
+   
     </div>
 
 }

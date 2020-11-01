@@ -1,7 +1,7 @@
 # TODO
 # Redux for payment info.
-# fetchPriceID fired twice, sending a null string first.
-# Prob. useEffect being a bish.
+# Set redirect URLs correctly Checkout/Cancel
+
 * Logic for clearly indicating Order information
   between Stripe and Website.
 * After successful payment, redirect to success page.
