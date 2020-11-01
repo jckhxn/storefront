@@ -7,8 +7,7 @@ import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
 import uploadRoute from './routes/uploadRoute';
-const fs = require('fs');
-const https = require('https');
+
 const mongodbUrl = config.MONGODB_URL;
 mongoose
   .connect(mongodbUrl, {
@@ -20,7 +19,7 @@ mongoose
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/static', { dotfiles: 'allow' }))
+
 app.use('/api/uploads', uploadRoute);
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
@@ -35,17 +34,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
 });
 
-// app.listen(config.PORT, () => {
-//   console.log('Server started at http://localhost:5000');
-// });
-
-let key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
-let cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
-let options = {
-  key: key,
-  cert: cert
-};
-let httpsServer = https.createServer(options,app);
-httpsServer.listen(5000, () => {
-  console.log("server starting on port : " + 5000)
+app.listen(config.PORT, () => {
+  console.log('Server started at http://localhost:5000');
 });
+
