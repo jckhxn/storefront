@@ -106,7 +106,7 @@ const StripeCheckout = () => {
       
   const [state, dispatch] = useReducer(reducer, {
     quantity: 1,
-    price: null,
+    price: priceFixed,
     loading: false,
     error: null,
     stripe: null,

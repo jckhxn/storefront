@@ -20,6 +20,11 @@ router.post("/price", async (req, res) => {
   }
 }
 catch(error) {
+  const priceID = await stripe.prices.create({
+    unit_amount: 0,
+    currency: req.body.currency,
+    product: req.body.product,
+  });
   console.log(error.message);
 }
 }
