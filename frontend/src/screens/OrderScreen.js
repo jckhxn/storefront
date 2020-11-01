@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createOrder, detailsOrder, payOrder } from '../actions/orderActions';
 import PaypalButton from '../components/PaypalButton';
+import StripeCheckout from '../components/StripeCheckout';
 
 function OrderScreen(props) {
   const userSignin = useSelector(state => state.userSignin);
@@ -126,7 +127,7 @@ function OrderScreen(props) {
               <div>Items</div>
               <div>${order.itemsPrice}</div>
             </li>
-            {discount? <li> <div>Discount</div>
+            {discount > 0 ?<li> <div>Discount</div>
           <div>{userInfo.coupon}%</div> </li>: null}
             <li>
               <div>Shipping</div>
@@ -147,6 +148,7 @@ function OrderScreen(props) {
         </div>
 
       </div>
+              <StripeCheckout/>
     </div>
 
 }

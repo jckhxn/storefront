@@ -26,7 +26,7 @@ function PlaceOrderScreen(props) {
   if(userInfo.coupon)
   {
     // Sets discount coupon if there is one.
-    discount = userInfo.coupon;
+    discount = parseInt(userInfo.coupon,10);
     const discountTotalPrice =  totalPrice - (totalPrice * discount / 100);
     totalPrice = discountTotalPrice;
 
@@ -122,7 +122,8 @@ function PlaceOrderScreen(props) {
             <div>Items</div>
             <div>${itemsPrice}</div>
           </li>
-          {discount? <li> <div>Discount</div>
+          
+          {discount > 0 ?<li> <div>Discount</div>
           <div>{userInfo.coupon}%</div> </li>: null}
 
           <li>

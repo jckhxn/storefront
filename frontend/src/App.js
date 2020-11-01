@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
+
 import SuccessScreen from './screens/SuccessScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -17,9 +18,10 @@ import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
 import UsersScreen from './screens/UsersScreen';
-
+import StripeScreen from './screens/StripeScreen';
 import { logout} from '../../frontend/src/actions/userActions';
 import header from './img/header.jpg'
+
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -90,6 +92,7 @@ function App() {
         </aside>
         <main className="main">
           <div className="content">
+            <Route path="/stripe" component={StripeScreen}/>
             <Route path="/users" component={UsersScreen}/>
             <Route path="/success" component={SuccessScreen}/>
             <Route path="/orders" component={OrdersScreen} />
