@@ -1,5 +1,7 @@
 # TODO
 # Redux for payment info.
+# Reorganize order flow - provide Stripe clear order/customer details.
+  * Maybe ref the order number in Storefront dashboard.
 # Set redirect URLs correctly Checkout/Cancel
 
 * Logic for clearly indicating Order information
