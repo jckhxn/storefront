@@ -25,17 +25,6 @@ const fetchPriceID = async (totalPrice) => {
 };
 // fetchPriceID().then((data) => console.log(data.id));
 
-const fetchCheckoutSession = async ({ quantity }) => {
-  return fetch("/api/orders/create-checkout-session", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      quantity,
-    }),
-  }).then((res) => res.json());
-};
 
 const formatPrice = ({ amount, currency, quantity }) => {
   const numberFormat = new Intl.NumberFormat("en-US", {
@@ -100,10 +89,27 @@ const StripeCheckout = () => {
   // Redux.
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
-  
+  const cart = useSelector(state => state.cart);
+
+  const { cartItems, shipping, payment } = cart;
+
+
   const priceFixed = order.totalPrice * 100;
   fetchPriceID(priceFixed);
       
+  const fetchCheckoutSession = async ({ quantity }) => {
+    return fetch("/api/orders/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quantity,
+        email:cart.shipping.contact,
+      }),
+    }).then((res) => res.json());
+  };
+  
   const [state, dispatch] = useReducer(reducer, {
     quantity: 1,
     price: priceFixed,

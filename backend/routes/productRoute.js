@@ -3,6 +3,7 @@ import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
+const stripe = require('stripe')('sk_test_51H7QRTAMLmRApP8Rb4oL3ksUsucERoKFOImjUog8lXk3JGJz9nExwlCe2erp2Q4sm0aA8rpjf7OyoImJ4du4EYld00RMsHih1y');
 
 router.get('/', async (req, res) => {
   const category = req.query.category ? { category: req.query.category } : {};
@@ -80,6 +81,9 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   const deletedProduct = await Product.findById(req.params.id);
   if (deletedProduct) {
     await deletedProduct.remove();
+    const deleted = await stripe.products.del(
+      deletedProduct.id
+    );
     res.send({ message: 'Product Deleted' });
   } else {
     res.send('Error in Deletion.');
@@ -108,6 +112,20 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
       else {
         console.log("You passed");
         const newProduct = await product.save();
+   
+        const stripeProduct = await stripe.products.create({
+          name: req.body.name,
+          id:newProduct.id,
+          
+        });
+        console.log(stripeProduct);
+        // Is this needed if you're setting a total on Cart?
+        // const price = await stripe.prices.create({
+        //   unit_amount: req.body.price * 100,
+        //   currency: 'usd',
+        //   product: stripeProduct.id,
+        // });
+       
         if (newProduct) {
           return res
             .status(201)

@@ -21,6 +21,7 @@ function OrderScreen(props) {
   const cart = useSelector(state => state.cart);
 
   const { cartItems, shipping, payment } = cart;
+
   const orderPay = useSelector(state => state.orderPay);
   const { loading: loadingPay, success: successPay, error: errorPay } = orderPay;
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function OrderScreen(props) {
   }, [successPay]);
 
   const handleSuccessPayment = (paymentResult) => {
+    console.log(paymentResult);
     dispatch(payOrder(order, paymentResult));
   }
 

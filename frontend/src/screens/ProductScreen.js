@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
+import {addItem} from '../actions/cartActions';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
 
@@ -40,8 +41,10 @@ function ProductScreen(props) {
       })
     );
   };
-  const handleAddToCart = () => {
-    props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+  const handleAddToCart = async () => {
+
+      props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
+    
   };
 
   return (

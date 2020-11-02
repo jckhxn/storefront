@@ -6,6 +6,9 @@ require("dotenv").config({ path: "../../.env" });
 
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+
+
 router.post("/price", async (req, res) => {
  if(req.body.unitAmount===null)
  {
@@ -52,8 +55,10 @@ router.get("/checkout-session", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale } = req.body;
- 
+  const { quantity, locale , email, items} = req.body;
+
+  // Receive an array of objects for line_items.
+  
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
@@ -70,16 +75,23 @@ router.post("/create-checkout-session", async (req, res) => {
         quantity: quantity,
       },
     ],
+    shipping_address_collection:{
+      allowed_countries: ['US']
+    },
+    customer_email:email,
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    success_url: `${domainURL}/success`,
-    cancel_url: `${domainURL}/cart/cart.html`,
+    success_url: `http://www.rossvilleraceproducts.com/success`,
+    cancel_url: `http://www.rossvileraceproducts.com/cart`,
   });
 
+  console.log(session);
   res.send({
     sessionId: session.id,
   });
 });
 
+
+// May not be needed.
 router.post("/checkout", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
@@ -98,7 +110,7 @@ router.post("/checkout", async (req, res) => {
       {
         price: process.env.PRICE,
         quantity: quantity,
-      },
+      }
     ],
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
     success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
