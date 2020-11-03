@@ -18,7 +18,7 @@ const addItem =  (productId, qty) => async (dispatch,getState) => {
       }),
     }).then((res) => res.json());
         
-    console.log(response.id + " & " + qty);
+    
       dispatch({type:CART_ADD_LIST_ITEM, payload: {
         price:response.id,
         quantity:qty

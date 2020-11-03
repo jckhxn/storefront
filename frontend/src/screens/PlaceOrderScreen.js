@@ -12,6 +12,8 @@ function PlaceOrderScreen(props) {
 
   
   const { cartItems, shipping, payment } = cart;
+
+  
   if (!shipping.address) {
     props.history.push("/shipping");
   } else if (!payment.paymentMethod) {

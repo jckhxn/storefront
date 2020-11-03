@@ -8,8 +8,6 @@ let priceID;
 
 // Set price based on Cart.
 const fetchPriceID = async (totalPrice) => {
-  
-  
   const response = await fetch("/api/orders/price", {
     method: "POST",
     headers: {
@@ -24,7 +22,6 @@ const fetchPriceID = async (totalPrice) => {
   return response.json();
 };
 // fetchPriceID().then((data) => console.log(data.id));
-
 
 const formatPrice = ({ amount, currency, quantity }) => {
   const numberFormat = new Intl.NumberFormat("en-US", {
@@ -89,14 +86,45 @@ const StripeCheckout = () => {
   // Redux.
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
 
   const { cartItems, shipping, payment } = cart;
 
-
+  
   const priceFixed = order.totalPrice * 100;
+  
   fetchPriceID(priceFixed);
-      
+  
+
+  let items = [];
+  const getPriceID = async (productID,price,qty) => {
+   
+    const ID = await fetch("/api/orders/price", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        unitAmount: price * 100 ,
+        currency: "usd",
+        product: productID,
+      }),
+    }).then(res => res.json()).then(data => items.push({price:data.id,quantity:qty}));
+
+   
+  };
+
+  console.log(cartItems);
+  cartItems.forEach((item) => getPriceID(item.product,item.price,item.qty));
+  console.log(items)
+  // let items = [];
+
+  // cartItems.forEach((item) =>
+  //   items.push({ price: getPriceID(item.product,item.price), quantity: item.qty })
+  // );
+  // console.log(items);
+
+
   const fetchCheckoutSession = async ({ quantity }) => {
     return fetch("/api/orders/create-checkout-session", {
       method: "POST",
@@ -105,11 +133,12 @@ const StripeCheckout = () => {
       },
       body: JSON.stringify({
         quantity,
-        email:cart.shipping.contact,
+        email: cart.shipping.contact,
+          items:items,
       }),
     }).then((res) => res.json());
   };
-  
+
   const [state, dispatch] = useReducer(reducer, {
     quantity: 1,
     price: priceFixed,
@@ -133,8 +162,6 @@ const StripeCheckout = () => {
         payload: { unitAmount, currency, stripe: await loadStripe(publicKey) },
       });
     }
-
-      
 
     fetchConfig();
   }, []);

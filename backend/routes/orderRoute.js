@@ -25,7 +25,7 @@ router.post("/price", async (req, res) => {
   if (priceID) {
     res.send(priceID);
     process.env.PRICE = priceID.id;
-    console.log(process.env.PRICE);
+    // console.log(process.env.PRICE);
   }
 }
 catch(error) {
@@ -56,6 +56,7 @@ router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
   const { quantity, locale , email, items} = req.body;
+  console.log(items);
 
   // Receive an array of objects for line_items.
   
@@ -69,22 +70,17 @@ router.post("/create-checkout-session", async (req, res) => {
     payment_method_types: process.env.PAYMENT_METHODS.split(", "),
     mode: "payment",
     locale: locale,
-    line_items: [
-      {
-        price: process.env.PRICE,
-        quantity: quantity,
-      },
-    ],
+    line_items: items,
     shipping_address_collection:{
       allowed_countries: ['US']
     },
     customer_email:email,
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    success_url: `https://www.rossvilleraceproducts.com/success`,
-    cancel_url: `https://www.rossvileraceproducts.com/cart`,
+    success_url: `${domainURL}/success`,
+    cancel_url: `${domainURL}/cart`,
   });
 
-  console.log(session);
+
   res.send({
     sessionId: session.id,
   });
