@@ -2,6 +2,8 @@
 
 # Stripe Button needs to be set to Live keys.
 
+# Change Payment Method to "Stripe" accross site if sticking with that.
+
 # Finalize Adding Products
 # Setting Price on Product Add / Stripe makes it difficult to delete.
 
