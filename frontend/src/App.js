@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 
@@ -22,10 +22,24 @@ import StripeScreen from './screens/StripeScreen';
 import { logout} from '../../frontend/src/actions/userActions';
 import header from './img/header.jpg'
 
-function App() {
+
+
+function App () {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
- 
+  const [productCategories, setCategories] = useState([]);
+  
+  const getProductCategories = async () =>
+  {
+    const response = fetch('/api/products').then(res => res.json()).then(data => setCategories(data));
+   
+  }
+  useEffect(() => {
+      getProductCategories();
+     
+  },[])
+
+  console.log(productCategories)
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
   };
@@ -81,12 +95,13 @@ function App() {
             x
           </button>
           <ul className="categories">
+       
             <li>
-              <Link to="/category/Cat1">Parts</Link>
+              <Link to="/category/Testing">Parts</Link>
             </li>
 
             <li>
-              <Link to="/category/Cat2">Other</Link>
+              <Link to="/category/Description">Other</Link>
             </li>
           </ul>
         </aside>
