@@ -53,7 +53,7 @@ router.get("/checkout-session", async (req, res) => {
 });
 
 router.post("/create-checkout-session", async (req, res) => {
-  const domainURL = process.env.DOMAIN;
+  const domainURL = window.location.host;
 
   const { quantity, locale , email, items} = req.body;
   console.log(items);
