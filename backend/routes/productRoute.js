@@ -4,6 +4,44 @@ import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
 const stripe = require('stripe')('sk_test_51H7QRTAMLmRApP8Rb4oL3ksUsucERoKFOImjUog8lXk3JGJz9nExwlCe2erp2Q4sm0aA8rpjf7OyoImJ4du4EYld00RMsHih1y');
+// Webhook handler for asynchronous events.
+router.post('/webhook', async (req, res) => {
+  let data;
+  let eventType;
+  // Check if webhook signing is configured.
+  if (process.env.STRIPE_WEBHOOK_SECRET) {
+    // Retrieve the event by verifying the signature using the raw body and secret.
+    let event;
+    let signature = req.headers['stripe-signature'];
+
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.rawBody,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.log(`⚠️  Webhook signature verification failed.`);
+      return res.sendStatus(400);
+    }
+    // Extract the object from the event.
+    data = event.data;
+    eventType = event.type;
+  } else {
+    // Webhook signing is recommended, but if the secret is not configured in `config.js`,
+    // retrieve the event data directly from the request body.
+    data = req.body.data;
+    eventType = req.body.type;
+  }
+
+  if (eventType === 'checkout.session.completed') {
+    console.log(`🔔  Payment received!`);
+  }
+
+  res.sendStatus(200);
+});
+
+
 
 router.get('/', async (req, res) => {
   const category = req.query.category ? { category: req.query.category } : {};
