@@ -13,9 +13,6 @@
 
 (https://dashboard.stripe.com/settings/emails)
 
-# Handle Successful Payment.
-# WebHooks?
-
 https://70p1h.sse.codesandbox.io/
 https://github.com/stripe-samples/checkout-one-time-payments
 

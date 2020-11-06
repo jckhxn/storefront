@@ -9,32 +9,46 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 
 
-router.post("/price", async (req, res) => {
- if(req.body.unitAmount===null)
- {
-   console.log("received null");
- }
- else 
- {
-  try{
-  const priceID = await stripe.prices.create({
-    unit_amount: req.body.unitAmount,
-    currency: req.body.currency,
-    product: req.body.product,
-  });
-  if (priceID) {
-    res.send(priceID);
-    process.env.PRICE = priceID.id;
-    // console.log(process.env.PRICE);
-  }
-}
-catch(error) {
 
-  console.log(error.message);
-}
- }
-}
-);
+
+router.post("/webhook", (req, res) => {
+  const event = req.body;
+
+  switch (event.type) {
+    case "checkout.session.completed":
+      const session = event.data.object;
+      console.log(userInfo);
+      console.log("Checkout Session : ",session);
+
+      break;
+
+    default:
+      console.log("Unknown event type: " + event.type);
+  }
+
+  res.send({ message: "success" });
+});
+
+router.post("/price", async (req, res) => {
+  if (req.body.unitAmount === null) {
+    console.log("received null");
+  } else {
+    try {
+      const priceID = await stripe.prices.create({
+        unit_amount: req.body.unitAmount,
+        currency: req.body.currency,
+        product: req.body.product,
+      });
+      if (priceID) {
+        res.send(priceID);
+        process.env.PRICE = priceID.id;
+        // console.log(process.env.PRICE);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+});
 router.get("/config", async (req, res) => {
   const price = await stripe.prices.retrieve(process.env.PRICE);
 
@@ -55,11 +69,11 @@ router.get("/checkout-session", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale , email, items} = req.body;
+  const { quantity, locale, email, items } = req.body;
   console.log(items);
 
   // Receive an array of objects for line_items.
-  
+
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
@@ -71,21 +85,19 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     locale: locale,
     line_items: items,
-    shipping_address_collection:{
-      allowed_countries: ['US']
+    shipping_address_collection: {
+      allowed_countries: ["US"],
     },
-    customer_email:email,
+    customer_email: email,
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
     success_url: `${domainURL}success`,
     cancel_url: `${domainURL}cart`,
-    });
-    
+  });
 
   res.send({
     sessionId: session.id,
   });
 });
-
 
 // May not be needed.
 router.post("/checkout", async (req, res) => {
@@ -106,7 +118,7 @@ router.post("/checkout", async (req, res) => {
       {
         price: process.env.PRICE,
         quantity: quantity,
-      }
+      },
     ],
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
     success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,

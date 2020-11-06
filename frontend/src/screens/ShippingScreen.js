@@ -17,11 +17,8 @@ function ShippingScreen(props) {
   const [contact, setContact] = useState('');
   const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.cart);
-
+  let cart = useSelector(state => state.cart);
   
-
-
 
   const resetAddress = (e) => {
     e.preventDefault();
@@ -50,7 +47,7 @@ function ShippingScreen(props) {
     <div className="form">
       <form onSubmit={submitHandler}>
         <ul className="form-container">
-        {cart.shipping.address === undefined ? null:  <button onClick={resetAddress}>Edit Address </button>}
+        {<button onClick={resetAddress}>Edit Address </button> }
           <li>
             <h2>Shipping</h2>
           </li>

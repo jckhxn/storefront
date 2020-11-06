@@ -51,7 +51,7 @@ function OrdersScreen(props) {
               <td>{order.isDelivered.toString()}</td>
               <td>{order.deliveredAt}</td>
               <>
-                <Link to={"/order/" + order._id} className="button secondary" >Details</Link>
+                <Link to={"/order/" + order._id}  className="button secondary" >Details</Link>
                 {' '}
                 <button type="button" onClick={() => deleteHandler(order)} className="button secondary">Delete</button>
               </>

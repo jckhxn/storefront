@@ -66,10 +66,13 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_PAY_REQUEST, payload: paymentResult });
     const { userSignin: { userInfo } } = getState();
+    console.log("Order Info : ", order._id);
+    console.log("Payment Result : ", paymentResult);
     const { data } = await Axios.put("/api/orders/" + order._id + "/pay", paymentResult, {
       headers:
         { Authorization: 'Bearer ' + userInfo.token }
     });
+    console.log("Payload Data from Paypal: ",data);
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data })
   } catch (error) {
     dispatch({ type: ORDER_PAY_FAIL, payload: error.message });

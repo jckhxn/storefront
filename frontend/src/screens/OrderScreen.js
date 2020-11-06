@@ -36,7 +36,7 @@ function OrderScreen(props) {
   }, [successPay]);
 
   const handleSuccessPayment = (paymentResult) => {
-    console.log(paymentResult);
+    console.log(order,paymentResult);
     dispatch(payOrder(order, paymentResult));
   }
 
@@ -116,12 +116,12 @@ function OrderScreen(props) {
           <ul>
             <li className="placeorder-actions-payment">
               {loadingPay && <div>Finishing Payment...</div>}
-              {!order.isPaid &&
-                // <PaypalButton
-                //   amount={order.totalPrice}
-                //   onSuccess={handleSuccessPayment} />
+              {/* {!order.isPaid &&
+                <PaypalButton
+                  amount={order.totalPrice}
+                  onSuccess={handleSuccessPayment} /> */}
                 <StripeCheckout/>
-              }
+              
             </li>
             <li>
               <h3>Order Summary</h3>

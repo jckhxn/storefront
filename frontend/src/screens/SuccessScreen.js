@@ -1,7 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { payOrder } from '../actions/orderActions';
-
 const divStyle = {
    textAlign:"center"
 }
@@ -10,12 +9,11 @@ function SuccessScreen() {
 
   const orderDetails = useSelector(state => state.orderDetails);
   const { loading, order, error } = orderDetails;
+  console.log(order);
+  
   const dispatch = useDispatch();
-  const handleSuccessPayment = (paymentResult) => {
-    dispatch(payOrder(order, paymentResult));
-  }
 
-
+  dispatch(payOrder(order, {isPaid:"true",_id:order._id}));
   return (
       <div style={divStyle}>
         
