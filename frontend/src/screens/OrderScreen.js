@@ -119,7 +119,7 @@ function OrderScreen(props) {
               {/* {!order.isPaid &&
                 <PaypalButton
                   amount={order.totalPrice}
-                  onSuccess={handleSuccessPayment} /> */}
+                  onSuccess={handleSuccessPayment} />} */}
                 <StripeCheckout/>
               
             </li>

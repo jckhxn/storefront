@@ -69,9 +69,8 @@ router.get("/checkout-session", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale, email, items } = req.body;
-  console.log(items);
-
+  const { quantity, locale, email, items, orderID } = req.body;
+console.log(orderID);
   // Receive an array of objects for line_items.
 
   // Create new Checkout Session for the order
@@ -90,7 +89,7 @@ router.post("/create-checkout-session", async (req, res) => {
     },
     customer_email: email,
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    success_url: `${domainURL}success`,
+    success_url: `${domainURL}success/?order_id=${orderID}`,
     cancel_url: `${domainURL}cart`,
   });
 

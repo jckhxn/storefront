@@ -90,7 +90,6 @@ const StripeCheckout = () => {
 
   const { cartItems, shipping, payment } = cart;
 
-  
   const priceFixed = order.totalPrice * 100;
   
   fetchPriceID(priceFixed);
@@ -114,18 +113,13 @@ const StripeCheckout = () => {
    
   };
 
-  console.log(cartItems);
+ 
   cartItems.forEach((item) => getPriceID(item.product,item.price,item.qty));
-  console.log(items)
-  // let items = [];
-
-  // cartItems.forEach((item) =>
-  //   items.push({ price: getPriceID(item.product,item.price), quantity: item.qty })
-  // );
-  // console.log(items);
-
-
+ 
+  const {_id} = orderDetails.order;
+ 
   const fetchCheckoutSession = async ({ quantity }) => {
+    
     return fetch("/api/orders/create-checkout-session", {
       method: "POST",
       headers: {
@@ -135,6 +129,7 @@ const StripeCheckout = () => {
         quantity,
         email: cart.shipping.contact,
           items:items,
+          orderID:_id,
       }),
     }).then((res) => res.json());
   };
