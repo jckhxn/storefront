@@ -35,7 +35,7 @@ function OrderScreen(props) {
     return () => {
     };
   }, [successPay]);
-
+ 
   const handleSuccessPayment = (paymentResult) => {
     console.log(order,paymentResult);
     dispatch(payOrder(order, paymentResult));
