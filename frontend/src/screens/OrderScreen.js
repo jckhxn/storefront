@@ -8,6 +8,7 @@ import StripeCheckout from '../components/StripeCheckout';
 function OrderScreen(props) {
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
+  
   let discount = null;
   
   if(userInfo.coupon)

@@ -18,8 +18,11 @@ function ShippingScreen(props) {
   const dispatch = useDispatch();
 
   let cart = useSelector(state => state.cart);
-  
-
+  if(!cart.shipping)
+  {
+    // Inital state.
+    cart.shipping = {"adresss":""};
+  }
   const resetAddress = (e) => {
     e.preventDefault();
    setAddress('');
@@ -47,7 +50,7 @@ function ShippingScreen(props) {
     <div className="form">
       <form onSubmit={submitHandler}>
         <ul className="form-container">
-        {<button onClick={resetAddress}>Edit Address </button> }
+        {cart.shipping.address === "" ? <button onClick={resetAddress}>Edit Address </button>  : null }
           <li>
             <h2>Shipping</h2>
           </li>

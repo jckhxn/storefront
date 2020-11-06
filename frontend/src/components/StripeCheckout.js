@@ -6,6 +6,7 @@ import "./global.css";
 
 let priceID;
 
+
 // Set price based on Cart.
 const fetchPriceID = async (totalPrice) => {
   const response = await fetch("/api/orders/price", {
@@ -87,7 +88,8 @@ const StripeCheckout = () => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
   const cart = useSelector((state) => state.cart);
-
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
   const { cartItems, shipping, payment } = cart;
 
   const priceFixed = order.totalPrice * 100;
@@ -130,6 +132,7 @@ const StripeCheckout = () => {
         email: cart.shipping.contact,
           items:items,
           orderID:_id,
+          userToken:userInfo.token,
       }),
     }).then((res) => res.json());
   };

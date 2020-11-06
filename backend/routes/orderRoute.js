@@ -1,7 +1,7 @@
 import express from "express";
 import Order from "../models/orderModel";
 import { isAuth, isAdmin } from "../util";
-
+import Axios from "axios";
 require("dotenv").config({ path: "../../.env" });
 
 const router = express.Router();
@@ -11,15 +11,26 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 
 
-router.post("/webhook", (req, res) => {
+router.post("/webhook", async (req, res) => {
   const event = req.body;
 
   switch (event.type) {
     case "checkout.session.completed":
       const session = event.data.object;
-      console.log(userInfo);
-      console.log("Checkout Session : ",session);
-
+      
+      console.log("OrderID  : ",session.client_reference_id);
+      console.log("Auth token: ",event.data.object.metadata.auth);
+      try {
+      const { data } = await Axios.put(`${process.env.DOMAIN}/api/orders/` + session.client_reference_id + "/pay", {isPaid:"true"}, {
+        headers:
+          { Authorization: 'Bearer ' + event.data.object.metadata.auth }
+      });
+      console.log(data);
+    } 
+    catch(error)
+    {
+      console.log(error.message);
+    }
       break;
 
     default:
@@ -69,8 +80,9 @@ router.get("/checkout-session", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale, email, items, orderID } = req.body;
-console.log(orderID);
+  const { quantity, locale, email, items, orderID,userToken } = req.body;
+
+ 
   // Receive an array of objects for line_items.
 
   // Create new Checkout Session for the order
@@ -87,12 +99,14 @@ console.log(orderID);
     shipping_address_collection: {
       allowed_countries: ["US"],
     },
+    metadata:{"auth":userToken},
     customer_email: email,
+    client_reference_id:orderID,
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
     success_url: `${domainURL}success/?order_id=${orderID}`,
     cancel_url: `${domainURL}cart`,
   });
-
+  
   res.send({
     sessionId: session.id,
   });
