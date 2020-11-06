@@ -1,6 +1,6 @@
 # TODO
 
-
+# Maybe add webhooks for payment succeeded, payment failed.
 # Stripe Button needs to be set to Live keys.
 
 # Change Payment Method to "Stripe" accross site if sticking with that.
