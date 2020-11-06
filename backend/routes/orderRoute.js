@@ -21,7 +21,7 @@ router.post("/webhook", async (req, res) => {
       console.log("OrderID  : ",session.client_reference_id);
       console.log("Auth token: ",event.data.object.metadata.auth);
       try {
-      const { data } = await Axios.put(`/api/orders/` + session.client_reference_id + "/pay", {isPaid:"true"}, {
+      const { data } = await Axios.put(`${process.env.DOMAIN}api/orders/` + session.client_reference_id + "/pay", {isPaid:"true"}, {
         headers:
           { Authorization: 'Bearer ' + event.data.object.metadata.auth }
       });
