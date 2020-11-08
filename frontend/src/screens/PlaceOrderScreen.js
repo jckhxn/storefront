@@ -24,7 +24,7 @@ function PlaceOrderScreen(props) {
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   let discount = null;
   const taxPrice = 0.04 * itemsPrice;
-  let totalPrice = itemsPrice  + taxPrice;
+  let totalPrice = itemsPrice  + shippingPrice + taxPrice;
   
   if(userInfo.coupon)
   {
@@ -129,10 +129,10 @@ function PlaceOrderScreen(props) {
           {discount > 0 ?<li> <div>Discount</div>
           <div>{userInfo.coupon}%</div> </li>: null}
 
-          {/* <li>
+          <li>
             <div>Shipping</div>
             <div>${shippingPrice}</div>
-          </li> */}
+          </li>
           <li>
             <div>Tax</div>
             <div>${taxPrice}</div>

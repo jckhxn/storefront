@@ -105,8 +105,8 @@ const StripeCheckout = () => {
     let discount;
     let priceIncluded = priceCents + taxRate ;
     let totalPrice;
-    
   
+
   if(userInfo.coupon)
   {
     // Sets discount coupon if there is one.
@@ -115,6 +115,9 @@ const StripeCheckout = () => {
      totalPrice = discountTotalPrice;
 
   }
+
+   
+
     const ID = await fetch("/api/orders/price", {
       method: "POST",
       headers: {

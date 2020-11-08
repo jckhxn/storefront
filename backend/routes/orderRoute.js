@@ -130,14 +130,17 @@ router.post("/create-checkout-session", async (req, res) => {
   //     sessionId: session.id,
   //   });
   // }
-
-
+console.log(orderID);
+   
  
   const session = await stripe.checkout.sessions.create({
     payment_method_types: process.env.PAYMENT_METHODS.split(", "),
     mode: "payment",
     locale: locale,
-    line_items: items,
+    line_items: [{
+      price:process.env.PRICE,
+      quantity:1
+    }],
     shipping_address_collection: {
       allowed_countries: ["US"],
     },

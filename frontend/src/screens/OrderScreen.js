@@ -133,10 +133,10 @@ function OrderScreen(props) {
             </li>
             {discount > 0 ?<li> <div>Discount</div>
           <div>{userInfo.coupon}%</div> </li>: null}
-            {/* <li>
+            <li>
               <div>Shipping</div>
               <div>${order.shippingPrice}</div>
-            </li> */}
+            </li>
             <li>
               <div>Tax</div>
               <div>${order.taxPrice}</div>
