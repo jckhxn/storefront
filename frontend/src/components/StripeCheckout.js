@@ -92,6 +92,7 @@ const StripeCheckout = () => {
   const { userInfo } = userSignin;
   const { cartItems, shipping, payment } = cart;
 
+
   const priceFixed = order.totalPrice * 100;
   
   fetchPriceID(priceFixed);
@@ -99,14 +100,28 @@ const StripeCheckout = () => {
 
   let items = [];
   const getPriceID = async (productID,price,qty) => {
-   
+    const taxRate = price * 4;
+    const priceCents = price * 100;
+    let discount;
+    let priceIncluded = priceCents + taxRate ;
+    let totalPrice;
+    
+  
+  if(userInfo.coupon)
+  {
+    // Sets discount coupon if there is one.
+     discount = parseInt(userInfo.coupon,10);
+     const discountTotalPrice =  priceIncluded - (priceIncluded * discount / 100);
+     totalPrice = discountTotalPrice;
+
+  }
     const ID = await fetch("/api/orders/price", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        unitAmount: price * 100 ,
+        unitAmount: totalPrice,
         currency: "usd",
         product: productID,
       }),
@@ -133,6 +148,7 @@ const StripeCheckout = () => {
           items:items,
           orderID:_id,
           userToken:userInfo.token,
+         coupon:userInfo.coupon || '',
       }),
     }).then((res) => res.json());
   };

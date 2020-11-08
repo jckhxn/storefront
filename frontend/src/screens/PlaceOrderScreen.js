@@ -20,10 +20,11 @@ function PlaceOrderScreen(props) {
     props.history.push("/payment");
   }
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+  // Price over $100 shipping free.
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   let discount = null;
   const taxPrice = 0.04 * itemsPrice;
-  let totalPrice = itemsPrice + shippingPrice + taxPrice;
+  let totalPrice = itemsPrice  + taxPrice;
   
   if(userInfo.coupon)
   {
@@ -128,10 +129,10 @@ function PlaceOrderScreen(props) {
           {discount > 0 ?<li> <div>Discount</div>
           <div>{userInfo.coupon}%</div> </li>: null}
 
-          <li>
+          {/* <li>
             <div>Shipping</div>
             <div>${shippingPrice}</div>
-          </li>
+          </li> */}
           <li>
             <div>Tax</div>
             <div>${taxPrice}</div>
