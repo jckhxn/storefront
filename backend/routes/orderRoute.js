@@ -2,7 +2,7 @@ import express from "express";
 import Order from "../models/orderModel";
 import { isAuth, isAdmin } from "../util";
 import Axios from "axios";
-import { nanoid } from "nanoid";
+
 require("dotenv").config({ path: "../../.env" });
 
 const router = express.Router();
