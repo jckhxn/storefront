@@ -181,6 +181,7 @@ const StripeCheckout = () => {
     }
 
     fetchConfig();
+    
   }, []);
 
   const handleClick = async (event) => {

@@ -34,6 +34,7 @@ function OrderScreen(props) {
     }
     return () => {
     };
+ 
   }, [successPay]);
  
   const handleSuccessPayment = (paymentResult) => {
@@ -122,6 +123,7 @@ function OrderScreen(props) {
                   amount={order.totalPrice}
                   onSuccess={handleSuccessPayment} />} */}
                 <StripeCheckout/>
+               
               
             </li>
             <li>

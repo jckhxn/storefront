@@ -24,6 +24,7 @@ function UsersScreen() {
   
   const handleEdit = (user) => {
     // Pop model, change coupon, push.
+    document.designMode = 'on';
     setModalVisible(true);
     setEditUser(user._id);
     console.log(user._id)
