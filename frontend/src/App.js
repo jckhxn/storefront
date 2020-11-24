@@ -28,7 +28,7 @@ function App () {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [productCategories, setCategories] = useState([]);
-    useAlan();
+    // useAlan();
   const getProductCategories = async () =>
   {
     const response = fetch('/api/products').then(res => res.json()).then(data => setCategories(data));
