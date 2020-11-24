@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
-import useAlan from './hooks/useAlan';
+// import useAlan from './hooks/useAlan';
 import SuccessScreen from './screens/SuccessScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
