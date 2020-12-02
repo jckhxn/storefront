@@ -342,6 +342,7 @@ a > .rating > span:last-child {
 .form-container li {
   display: flex;
   flex-direction: column;
+  text-align: center;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }

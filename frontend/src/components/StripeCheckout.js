@@ -100,23 +100,53 @@ const StripeCheckout = () => {
 
   let items = [];
   const getPriceID = async (productID,price,qty) => {
+    
+    
     const taxRate = price * 4;
     const priceCents = price * 100;
     let discount;
     let priceIncluded = priceCents + taxRate ;
     let totalPrice;
+    
+    
+    if(userInfo.coupon)
+    {
+      // Sets discount coupon if there is one.
+       discount = parseInt(userInfo.coupon,10);
+       const discountTotalPrice =  priceIncluded - (priceIncluded * discount / 100);
+       totalPrice = discountTotalPrice;
   
+    }
 
-  if(userInfo.coupon)
+    let priceCheck = price.toString();
+    if(priceCheck.includes('.'))
   {
-    // Sets discount coupon if there is one.
-     discount = parseInt(userInfo.coupon,10);
-     const discountTotalPrice =  priceIncluded - (priceIncluded * discount / 100);
-     totalPrice = discountTotalPrice;
-
+    
+      
+    price =  parseInt(price.toString().replace(".", "")  , 10);
+    // Hit decimal API route.
+    
+    const ID = await fetch("/api/orders/price/decimal", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        unitAmount: totalPrice.toFixed(),
+        currency: "usd",
+        product: productID,
+      }),
+    }).then(res => res.json()).then(data => items.push({price:data.id,quantity:qty}));
+    
   }
 
-   
+
+
+    
+
+   if (!priceCheck.includes("."))
+   {  
+     
 
     const ID = await fetch("/api/orders/price", {
       method: "POST",
@@ -129,15 +159,15 @@ const StripeCheckout = () => {
         product: productID,
       }),
     }).then(res => res.json()).then(data => items.push({price:data.id,quantity:qty}));
-
-   
+    
+   } 
   };
-
+  
  
   cartItems.forEach((item) => getPriceID(item.product,item.price,item.qty));
  
   const {_id} = orderDetails.order;
- 
+
   const fetchCheckoutSession = async ({ quantity }) => {
     
     return fetch("/api/orders/create-checkout-session", {
@@ -180,6 +210,7 @@ const StripeCheckout = () => {
       });
     }
 
+    
     fetchConfig();
     
   }, []);

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 const COMMANDS = {
@@ -10,9 +11,9 @@ const COMMANDS = {
 
 export default function useAlan(props) {
 
+
   const roomUUID = window.location.pathname;
 const productID = roomUUID.replace("/product/", "");
-console.log(productID);
   const [alanInstance, setAlanInstance] = useState();
  
   const openCart = useCallback(() => {
@@ -40,6 +41,7 @@ console.log(productID);
       } else {
         // Change this to select item by name, if on homepage
         alanInstance.playText("No item displayed");
+      
       }
     },
     [alanInstance]
@@ -53,16 +55,16 @@ console.log(productID);
       window.removeEventListener(COMMANDS.CLOSE_CART, closeCart);
       window.removeEventListener(COMMANDS.ADD_ITEM, addItem);
     };
-  }, [openCart, closeCart]);
+  }, [openCart, closeCart,addItem]);
   useEffect(() => {
     if (alanInstance != null) return;
-
+   
     setAlanInstance(
       alanBtn({
         // top:'15px',
         // left:'15px',
         key:
-          "41ca5b74b8ee684bbd428a5ffe6c64a52e956eca572e1d8b807a3e2338fdd0dc/stage",
+         "41ca5b74b8ee684bbd428a5ffe6c64a52e956eca572e1d8b807a3e2338fdd0dc/stage",
 
         onCommand: ({ command, payload }) => {
           window.dispatchEvent(new CustomEvent(command, { detail: payload }));
@@ -70,6 +72,6 @@ console.log(productID);
       })
     );
   }, []);
-
+    
   return null;
 }

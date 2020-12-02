@@ -41,12 +41,14 @@ router.post("/webhook", async (req, res) => {
 });
 
 router.post("/price", async (req, res) => {
+
+
   if (req.body.unitAmount === null) {
     console.log("received null");
   } else {
     try {
       const priceID = await stripe.prices.create({
-        unit_amount: req.body.unitAmount,
+        unit_amount: req.body.unitAmount.toFixed(),
         currency: req.body.currency,
         product: req.body.product,
       });
@@ -54,6 +56,29 @@ router.post("/price", async (req, res) => {
         res.send(priceID);
         process.env.PRICE = priceID.id;
         // console.log(process.env.PRICE);
+      }
+    } catch (error) {
+      console.log("!" + error.message);
+    }
+  }
+});
+
+
+router.post("/price/decimal", async (req, res) => {
+  
+  if (req.body.unitAmount === null) {
+    console.log("received null");
+  } else {
+    try {
+      const priceID = await stripe.prices.create({
+        unit_amount_decimal: req.body.unitAmount,
+        currency: req.body.currency,
+        product: req.body.product,
+      });
+      if (priceID) {
+        res.send(priceID);
+        process.env.PRICE = priceID.id;
+         console.log("CHANGEDPRICE?" + process.env.PRICE);
       }
     } catch (error) {
       console.log(error.message);

@@ -1,11 +1,14 @@
 # TODO
 
+# Fixed decimal point prices.
+# Sometimes does this stupid thing when you back out that I need to fix, only on multiple products.
 
-# Omitted Shipping because Checkout doesn't allow you to add shipping after the fact.
+# Add gallery for multiple product images/
+# Add Firebase Signup/Signin
+
 
 # Stripe Button needs to be set to Live keys.
-
-# Button Styling / Branding.
+ 
 
 # Send automatic receipts
 
