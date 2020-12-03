@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer,useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import "./normalize.css";
@@ -38,6 +38,7 @@ const formatPrice = ({ amount, currency, quantity }) => {
   }
   amount = zeroDecimalCurrency ? amount : amount / 100;
   const total = (quantity * amount).toFixed(2);
+  
   return numberFormat.format(total);
 };
 
@@ -90,10 +91,11 @@ const StripeCheckout = () => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { cartItems, shipping, payment } = cart;
-
+  
   const priceFixed = order.totalPrice * 100;
 
   fetchPriceID(priceFixed);
+  
 
   let items = [];
   const getPriceID = async (productID, price, qty) => {
@@ -113,6 +115,8 @@ const StripeCheckout = () => {
 
     let priceCheck = price.toString();
     if (priceCheck.includes(".")) {
+      
+      
       price = parseInt(price.toString().replace(".", ""), 10);
       // Hit decimal API route.
 
@@ -129,7 +133,8 @@ const StripeCheckout = () => {
       })
         .then((res) => res.json())
         .then((data) => items.push({ price: data.id, quantity: qty }));
-    } else {
+    } 
+    if(!priceCheck.includes(".")) {
       const ID = await fetch("/api/orders/price", {
         method: "POST",
         headers: {
@@ -144,9 +149,13 @@ const StripeCheckout = () => {
         .then((res) => res.json())
         .then((data) => items.push({ price: data.id, quantity: qty }));
     }
-  };
-
-  cartItems.forEach((item) => getPriceID(item.product, item.price, item.qty));
+  };  
+  
+    useEffect(() => {
+      cartItems.forEach((item) => getPriceID(item.product, item.price, item.qty));
+      console.log("Getting prices, once");
+    }, [])
+  // cartItems.forEach((item) => getPriceID(item.product, item.price, item.qty));
 
   const { _id } = orderDetails.order;
 
@@ -176,6 +185,7 @@ const StripeCheckout = () => {
   });
 
   useEffect(() => {
+    
     async function fetchConfig() {
       // Fetch config from our backend.
       const { publicKey, unitAmount, currency } = await fetch(
@@ -192,15 +202,19 @@ const StripeCheckout = () => {
     }
 
     fetchConfig();
+    
     console.log("useEffect");
+ 
   }, []);
 
   const handleClick = async (event) => {
+    
     // Call your backend to create the Checkout session.
     dispatch({ type: "setLoading", payload: { loading: true } });
     const { sessionId } = await fetchCheckoutSession({
       quantity: state.quantity,
     });
+   
     // When the customer clicks on the button, redirect them to Checkout.
     const { error } = await state.stripe.redirectToCheckout({
       sessionId,

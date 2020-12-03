@@ -1,7 +1,7 @@
 # TODO
 
 # Fixed decimal point prices.
-# price ID updates multiple times.
+
 
 # Add gallery for multiple product images/
 # Add Firebase Signup/Signin
