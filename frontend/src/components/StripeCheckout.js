@@ -6,7 +6,6 @@ import "./global.css";
 
 let priceID;
 
-
 // Set price based on Cart.
 const fetchPriceID = async (totalPrice) => {
   const response = await fetch("/api/orders/price", {
@@ -88,88 +87,70 @@ const StripeCheckout = () => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
   const cart = useSelector((state) => state.cart);
-  const userSignin = useSelector(state => state.userSignin);
+  const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const { cartItems, shipping, payment } = cart;
 
-
   const priceFixed = order.totalPrice * 100;
-  
+
   fetchPriceID(priceFixed);
-  
 
   let items = [];
-  const getPriceID = async (productID,price,qty) => {
-    
-    
+  const getPriceID = async (productID, price, qty) => {
     const taxRate = price * 4;
     const priceCents = price * 100;
     let discount;
-    let priceIncluded = priceCents + taxRate ;
+    let priceIncluded = priceCents + taxRate;
     let totalPrice;
-    
-    
-    if(userInfo.coupon)
-    {
+
+    if (userInfo.coupon) {
       // Sets discount coupon if there is one.
-       discount = parseInt(userInfo.coupon,10);
-       const discountTotalPrice =  priceIncluded - (priceIncluded * discount / 100);
-       totalPrice = discountTotalPrice;
-  
+      discount = parseInt(userInfo.coupon, 10);
+      const discountTotalPrice =
+        priceIncluded - (priceIncluded * discount) / 100;
+      totalPrice = discountTotalPrice;
     }
 
     let priceCheck = price.toString();
-    if(priceCheck.includes('.'))
-  {
-    
-      
-    price =  parseInt(price.toString().replace(".", "")  , 10);
-    // Hit decimal API route.
-    
-    const ID = await fetch("/api/orders/price/decimal", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        unitAmount: totalPrice.toFixed(),
-        currency: "usd",
-        product: productID,
-      }),
-    }).then(res => res.json()).then(data => items.push({price:data.id,quantity:qty}));
-    
-  }
+    if (priceCheck.includes(".")) {
+      price = parseInt(price.toString().replace(".", ""), 10);
+      // Hit decimal API route.
 
-
-
-    
-
-   if (!priceCheck.includes("."))
-   {  
-     
-
-    const ID = await fetch("/api/orders/price", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        unitAmount: totalPrice,
-        currency: "usd",
-        product: productID,
-      }),
-    }).then(res => res.json()).then(data => items.push({price:data.id,quantity:qty}));
-    
-   } 
+      const ID = await fetch("/api/orders/price/decimal", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          unitAmount: totalPrice.toFixed(),
+          currency: "usd",
+          product: productID,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => items.push({ price: data.id, quantity: qty }));
+    } else {
+      const ID = await fetch("/api/orders/price", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          unitAmount: totalPrice,
+          currency: "usd",
+          product: productID,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => items.push({ price: data.id, quantity: qty }));
+    }
   };
-  
- 
-  cartItems.forEach((item) => getPriceID(item.product,item.price,item.qty));
- 
-  const {_id} = orderDetails.order;
+
+  cartItems.forEach((item) => getPriceID(item.product, item.price, item.qty));
+
+  const { _id } = orderDetails.order;
 
   const fetchCheckoutSession = async ({ quantity }) => {
-    
     return fetch("/api/orders/create-checkout-session", {
       method: "POST",
       headers: {
@@ -178,10 +159,10 @@ const StripeCheckout = () => {
       body: JSON.stringify({
         quantity,
         email: cart.shipping.contact,
-          items:items,
-          orderID:_id,
-          userToken:userInfo.token,
-         coupon:userInfo.coupon || '',
+        items: items,
+        orderID: _id,
+        userToken: userInfo.token,
+        coupon: userInfo.coupon || "",
       }),
     }).then((res) => res.json());
   };
@@ -210,9 +191,8 @@ const StripeCheckout = () => {
       });
     }
 
-    
     fetchConfig();
-    
+    console.log("useEffect");
   }, []);
 
   const handleClick = async (event) => {
@@ -241,43 +221,7 @@ const StripeCheckout = () => {
           <div className="sr-header__logo"></div>
         </header> */}
         <section className="container">
-          {/* <div>
-            <h1>Single photo</h1>
-            <h4>Purchase a Pasha original photo</h4>
-            <div className="pasha-image">
-              <img
-                alt="Random asset from Picsum"
-                src="https://picsum.photos/280/320?random=4"
-                width="140"
-                height="160"
-              />
-            </div>
-          </div> */}
-          {/* <div className="quantity-setter">
-            <button
-              className="increment-btn"
-              disabled={state.quantity === 1}
-              onClick={() => dispatch({ type: 'decrement' })}
-            >
-              -
-            </button>
-            <input
-              type="number"
-              id="quantity-input"
-              min="1"
-              max="10"
-              value={state.quantity}
-              readOnly
-            />  
-            <button
-              className="increment-btn"
-              disabled={state.quantity === 10}
-              onClick={() => dispatch({ type: 'increment' })}
-            >
-              +
-            </button>
-          </div> */}
-          {/* <p className="sr-legal-text">Number of copies (max 10)</p> */}
+          {}
 
           <button
             role="link"

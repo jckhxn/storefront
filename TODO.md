@@ -1,7 +1,7 @@
 # TODO
 
 # Fixed decimal point prices.
-# Sometimes does this stupid thing when you back out that I need to fix, only on multiple products.
+# price ID updates multiple times.
 
 # Add gallery for multiple product images/
 # Add Firebase Signup/Signin

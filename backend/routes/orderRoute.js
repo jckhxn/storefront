@@ -55,7 +55,7 @@ router.post("/price", async (req, res) => {
       if (priceID) {
         res.send(priceID);
         process.env.PRICE = priceID.id;
-        // console.log(process.env.PRICE);
+      
       }
     } catch (error) {
       console.log("!" + error.message);
