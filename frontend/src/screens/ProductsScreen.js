@@ -8,7 +8,7 @@ import {
 } from '../actions/productActions';
 
 function ProductsScreen(props) {
-  const stripe = require('stripe')('sk_test_51H7QRTAMLmRApP8Rb4oL3ksUsucERoKFOImjUog8lXk3JGJz9nExwlCe2erp2Q4sm0aA8rpjf7OyoImJ4du4EYld00RMsHih1y');
+ 
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
   const [name, setName] = useState('');
@@ -151,16 +151,7 @@ function ProductsScreen(props) {
                 <input type="file" onChange={uploadFileHandler}></input>
                 {uploading && <div>Uploading...</div>}
               </li>
-              {/* <li>
-                <label htmlFor="brand">Brand</label>
-                <input
-                  type="text"
-                  name="brand"
-                  value={brand}
-                  id="brand"
-                  onChange={(e) => setBrand(e.target.value)}
-                ></input>
-              </li> */}
+            
               <li>
                 <label htmlFor="countInStock">CountInStock</label>
                 <input
