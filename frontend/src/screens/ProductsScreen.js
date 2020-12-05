@@ -217,7 +217,7 @@ function ProductsScreen(props) {
               <th>Name</th>
               <th>Price</th>
               <th>Category</th>
-              <th>Brand</th>
+            
               <th>Action</th>
             </tr>
           </thead>

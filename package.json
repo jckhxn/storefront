@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.5",
+    "@auth0/auth0-react": "^1.2.0",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.11.0",
     "aws-sdk": "^2.702.0",
@@ -13,7 +14,9 @@
     "dotenv": "^8.2.0",
     "eslint-plugin-react": "^7.19.0",
     "express": "^4.17.1",
+    "express-openid-connect": "^2.0.0",
     "find-config": "^1.0.0",
+    "firebase": "^8.1.2",
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.11",

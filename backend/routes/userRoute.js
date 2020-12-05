@@ -5,6 +5,8 @@ import { getToken, isAuth, isAdmin } from '../util';
 const router = express.Router();
 
 
+router.post('/')
+
 router.get('/list', async (req,res) => {
   const users = await User.find({});
  if(users)
