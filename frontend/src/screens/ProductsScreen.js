@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import {
   saveProduct,
   listProducts,
   deleteProdcut,
-} from '../actions/productActions';
+} from "../actions/productActions";
 
 function ProductsScreen(props) {
- 
   const [modalVisible, setModalVisible] = useState(false);
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
-  const [brand, setBrand] = useState('');
-  const [category, setCategory] = useState('');
-  const [countInStock, setCountInStock] = useState('');
-  const [description, setDescription] = useState('');
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [countInStock, setCountInStock] = useState("");
+  const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
   const productList = useSelector((state) => state.productList);
   const { loading, products, error } = productList;
+  const fileInput = useRef();
+  const images = [];
 
   const productSave = useSelector((state) => state.productSave);
   const {
@@ -60,44 +62,59 @@ function ProductsScreen(props) {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    
+    console.log(images);
     dispatch(
       saveProduct({
         _id: id,
         name,
         price,
         image,
-        brand,
+        brand, 
         category,
         countInStock,
         description,
       })
     );
-
-    
   };
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
   };
   const uploadFileHandler = (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append('image', file);
-    setUploading(true);
-    axios
-      .post('/api/uploads/s3', bodyFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((response) => {
-        setImage(response.data);
-        setUploading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setUploading(false);
-      });
+    if (e.target.files.length > 1) {
+      console.log("Greater than 1");
+    }
+    if (e.target.files.length === 1) {
+      console.log("Just one");
+    }
+    for (let i = 0; i < e.target.files.length; i++) {
+      // Handles multiple image uploads.
+      const file = e.target.files[i];
+      const bodyFormData = new FormData();
+      bodyFormData.append("image", file);
+
+      setUploading(true);
+      axios
+        .post("/api/uploads/s3", bodyFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          // Each time this runs add to image array.
+          // Currently adds to string saved to product.image
+          // Temp store array of images and on product update/create if array is
+          // greater than 1, useDispatch  to update product to images array.
+         
+          setImage(response.data);
+
+          setUploading(false);
+         
+        })
+        .catch((err) => {
+          console.log(err);
+          setUploading(false);
+        });
+    }
   };
   return (
     <div className="content content-margined">
@@ -127,7 +144,8 @@ function ProductsScreen(props) {
                   value={name}
                   id="name"
                   onChange={(e) => setName(e.target.value)}
-                required></input>
+                  required
+                ></input>
               </li>
               <li>
                 <label htmlFor="price">Price</label>
@@ -136,7 +154,8 @@ function ProductsScreen(props) {
                   name="price"
                   value={price}
                   id="price"
-                  onChange={(e) => setPrice(e.target.value)} required
+                  onChange={(e) => setPrice(e.target.value)}
+                  required
                 ></input>
               </li>
               <li>
@@ -146,12 +165,18 @@ function ProductsScreen(props) {
                   name="image"
                   value={image}
                   id="image"
-                  onChange={(e) => setImage(e.target.value)} required
+                  onChange={(e) => setImage(e.target.value)}
+                  required
                 ></input>
-                <input type="file" onChange={uploadFileHandler}></input>
+                <input
+                  type="file"
+                  multiple
+                  ref={fileInput}
+                  onChange={uploadFileHandler}
+                ></input>
                 {uploading && <div>Uploading...</div>}
               </li>
-            
+
               <li>
                 <label htmlFor="countInStock">CountInStock</label>
                 <input
@@ -160,7 +185,8 @@ function ProductsScreen(props) {
                   value={countInStock}
                   id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}
-                required></input>
+                  required
+                ></input>
               </li>
               <li>
                 <label htmlFor="name">Category</label>
@@ -170,7 +196,8 @@ function ProductsScreen(props) {
                   value={category}
                   id="category"
                   onChange={(e) => setCategory(e.target.value)}
-                required></input>
+                  required
+                ></input>
               </li>
               <li>
                 <label htmlFor="description">Description</label>
@@ -179,11 +206,12 @@ function ProductsScreen(props) {
                   value={description}
                   id="description"
                   onChange={(e) => setDescription(e.target.value)}
-                required></textarea>
+                  required
+                ></textarea>
               </li>
               <li>
                 <button type="submit" className="button primary">
-                  {id ? 'Update' : 'Create'}
+                  {id ? "Update" : "Create"}
                 </button>
               </li>
               <li>
@@ -208,7 +236,7 @@ function ProductsScreen(props) {
               <th>Name</th>
               <th>Price</th>
               <th>Category</th>
-            
+
               <th>Action</th>
             </tr>
           </thead>
@@ -223,7 +251,7 @@ function ProductsScreen(props) {
                 <td>
                   <button className="button" onClick={() => openModal(product)}>
                     Edit
-                  </button>{' '}
+                  </button>{" "}
                   <button
                     className="button"
                     onClick={() => deleteHandler(product)}

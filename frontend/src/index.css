@@ -1,6 +1,7 @@
 * {
   max-width: 100vw;
 }
+
 html {
   font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
   box-sizing: border-box;
@@ -52,6 +53,7 @@ button {
 /* For Mobile */
 /* I don't like it but it fixes resp design */
 @media only screen and (max-width: 700px) {
+  
   .order-list tr {
     display: flex;
     flex-direction: column;
@@ -374,9 +376,7 @@ th {
 tbody > tr:nth-child(odd) {
   background-color: #f0f0f0;
 }
-.table button {
-  
-}
+
 /* Checkout Steps */
 
 .checkout-steps {
