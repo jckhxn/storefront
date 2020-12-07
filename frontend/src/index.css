@@ -54,6 +54,7 @@ button {
 /* I don't like it but it fixes resp design */
 @media only screen and (max-width: 700px) {
   
+ 
   .order-list tr {
     display: flex;
     flex-direction: column;

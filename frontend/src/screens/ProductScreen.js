@@ -63,6 +63,7 @@ function ProductScreen(props) {
                 {/*   Map over product.image array and add divs according.*/}
                 <div data-src={product.image}></div>
                 
+               
               </AwesomeSlider>
               {/* <img src={product.image} alt="product"></img> */}
             </div>
