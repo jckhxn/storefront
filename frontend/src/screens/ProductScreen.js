@@ -62,7 +62,7 @@ function ProductScreen(props) {
               <AwesomeSlider className="aws-button">
                 {/*   Map over product.image array and add divs according.*/}
                 <div data-src={product.image}></div>
-                
+                <div data-src={product.image}></div>
                
               </AwesomeSlider>
               {/* <img src={product.image} alt="product"></img> */}
