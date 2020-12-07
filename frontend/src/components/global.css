@@ -352,7 +352,12 @@
     .details-action {
       margin-top: 7%;
     }
+    .aws-button {
+      padding: 0 0 0 0;
+      
+    }
   }
+  
   @media (max-width: 720px) {
     .details-info
     {
@@ -362,7 +367,9 @@
       padding: 0 0 0 0;
       
     }
-  
+    .product-image {
+      margin-right: 30px;
+    }
    
 
     
