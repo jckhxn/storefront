@@ -3,7 +3,6 @@
 Developed a ecommerce front and backend using React, Express & MongoDB.  Implemented AWS for storing product images, PayPal & Stripe for customer purchases.
 
 
-
 Customers can view products on the front page.  You can select products and add to the cart (also shown at the upper right) and proceed to checkout.  If they are not already logged in they are prompted to do so, or register for an account.
 Once doing so they enter their shipping address, select PayPal and continue.
 PayPal can handle debit or credit cards without the need for them having an account if needbe. 
