@@ -18,6 +18,7 @@
   * {
     box-sizing: border-box;
   }
+  /* Amwesome Slider Image Viewer. */
   .aws-button {
     --slider-height-percentage: 60%;
 --slider-transition-duration: 400ms;
@@ -47,6 +48,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  
+}
+/* Dropshadow box. */
+.aws-frm--2hSr {
+  display: flex;
+  -webkit-box-shadow: 8px 8px 0 rgba(0,0,0,.15);
+  box-shadow: 8px 8px 0 rgba(0,0,0,.15);
 }
 .details-info {
   padding: 0 0 0 3%;

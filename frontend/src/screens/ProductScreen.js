@@ -19,7 +19,7 @@ function ProductScreen(props) {
   const { success: productSaveSuccess } = productReviewSave;
   const dispatch = useDispatch();
   
-  console.log(product)
+  
 
   useEffect(() => {
     if (productSaveSuccess) {
@@ -61,6 +61,7 @@ function ProductScreen(props) {
         <>
           <div className="details">
             <div className="details-image">
+              <div className="aws-frm--2hSr">
               <AwesomeSlider className="aws-button">
                 {/*   Map over product.image array and add divs according.*/}
                 {/* This array is reversed to match thumbnail */ }
@@ -71,6 +72,7 @@ function ProductScreen(props) {
               
               
               </AwesomeSlider>
+              </div>
             </div>
             <div className="details-info">
               <ul>
