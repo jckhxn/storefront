@@ -1,9 +1,5 @@
 # TODO
 
-# Add gallery for multiple product images/
-# Possible gallery viewer
-https://caferati.me/demo/react-awesome-slider
-
 
 Frontend -> Sends single file to /api/uploads.
 Response is set to product with SetImage(response);

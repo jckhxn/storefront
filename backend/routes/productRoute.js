@@ -64,6 +64,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
     product.name = req.body.name;
     product.price = req.body.price;
     product.image = req.body.image;
+    product.images = req.body.images;
     product.brand = req.body.brand;
     product.category = req.body.category;
     product.countInStock = req.body.countInStock;
@@ -92,10 +93,13 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
 });
 
 router.post('/', isAuth, isAdmin, async (req, res) => {
+ 
+  console.log(req.body.images);
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
     image: req.body.image,
+    images: req.body.images,
     category: req.body.category,
     countInStock: req.body.countInStock,
     description: req.body.description,
@@ -105,7 +109,7 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
     product.validate(async (err) => {
       if(err)
       {
-        console.log("Error'dd");
+        console.log(err);
         res.status(500).send(
             { message:'Must fill required fields.' });
           

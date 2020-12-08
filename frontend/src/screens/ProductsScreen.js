@@ -40,7 +40,9 @@ function ProductsScreen(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    
     if (successSave) {
+
       setModalVisible(false);
     }
     dispatch(listProducts());
@@ -59,8 +61,10 @@ function ProductsScreen(props) {
     setBrand(product.brand);
     setCategory(product.category);
     setCountInStock(product.countInStock);
+  
   };
   const submitHandler = async (e) => {
+   
     e.preventDefault();
     dispatch(
       saveProduct({
@@ -106,6 +110,7 @@ function ProductsScreen(props) {
           // greater than 1, useDispatch  to update product to images array.
          
           images.push(response.data);
+          console.log("this should run when updating too");
          
           setImage(response.data);
 
