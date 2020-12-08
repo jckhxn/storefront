@@ -84,6 +84,7 @@ function ProductsScreen(props) {
     dispatch(deleteProdcut(product._id));
   };
   const uploadFileHandler = (e) => {
+   
     if (e.target.files.length > 1) {
       console.log("Greater than 1");
     }
@@ -110,7 +111,7 @@ function ProductsScreen(props) {
           // greater than 1, useDispatch  to update product to images array.
          
           images.push(response.data);
-          console.log("this should run when updating too");
+          
          
           setImage(response.data);
 

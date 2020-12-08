@@ -1,10 +1,6 @@
 # TODO
+ 
 
-
-Frontend -> Sends single file to /api/uploads.
-Response is set to product with SetImage(response);
-(Set array of images and setup gallery on frontend if there are more than one.)
-MongoDB schema expects string, need to update to Array.
 # Stripe Button needs to be set to Live keys.
  
 
