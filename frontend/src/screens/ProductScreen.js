@@ -18,6 +18,8 @@ function ProductScreen(props) {
   const productReviewSave = useSelector((state) => state.productReviewSave);
   const { success: productSaveSuccess } = productReviewSave;
   const dispatch = useDispatch();
+  
+  console.log(product)
 
   useEffect(() => {
     if (productSaveSuccess) {
@@ -61,11 +63,14 @@ function ProductScreen(props) {
             <div className="details-image">
               <AwesomeSlider className="aws-button">
                 {/*   Map over product.image array and add divs according.*/}
-                <div data-src={product.image}></div>
-                <div data-src={product.image}></div>
-               
+                {/* This array is reversed to match thumbnail */ }
+                {product.images? product.images.reverse().map((image,index) => (
+                  <div data-src={image}></div>
+                )) :( null
+                )}
+              
+              
               </AwesomeSlider>
-              {/* <img src={product.image} alt="product"></img> */}
             </div>
             <div className="details-info">
               <ul>

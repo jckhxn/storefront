@@ -19,10 +19,10 @@ function ProductsScreen(props) {
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [images,setImages] = useState([]);
   const productList = useSelector((state) => state.productList);
   const { loading, products, error } = productList;
   const fileInput = useRef();
-  const images = [];
 
   const productSave = useSelector((state) => state.productSave);
   const {
@@ -62,13 +62,13 @@ function ProductsScreen(props) {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(images);
     dispatch(
       saveProduct({
         _id: id,
         name,
         price,
         image,
+        images,
         brand, 
         category,
         countInStock,
@@ -105,8 +105,11 @@ function ProductsScreen(props) {
           // Temp store array of images and on product update/create if array is
           // greater than 1, useDispatch  to update product to images array.
          
+          images.push(response.data);
+         
           setImage(response.data);
 
+          
           setUploading(false);
          
         })
