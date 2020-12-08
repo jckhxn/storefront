@@ -1,5 +1,6 @@
 # TODO
  
+# Dynamically load preview images for gallery button.
 
 # Stripe Button needs to be set to Live keys.
  

@@ -37,6 +37,8 @@
 
 
   }
+
+
   .awssld__content img{
     max-width: 100%;
     max-height: 100%;
@@ -53,9 +55,18 @@
 /* Dropshadow box. */
 .aws-frm--2hSr {
   display: flex;
-  -webkit-box-shadow: 8px 8px 0 rgba(0,0,0,.15);
-  box-shadow: 8px 8px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: 8px 8px 0 rgba(230,70,97,.30);
+  box-shadow: 8px 8px 0 rgba(230,70,97,.30);
 }
+
+
+.awssld__bullets button{
+    /* background-image: url( 
+    'https://rossvilleraceparts.s3.amazonaws.com/128551029_748555126014644_5309039524081970471_n.jpg');  */
+   background-size: cover;
+}
+
+
 .details-info {
   padding: 0 0 0 3%;
   }

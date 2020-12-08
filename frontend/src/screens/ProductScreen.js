@@ -19,9 +19,11 @@ function ProductScreen(props) {
   const { success: productSaveSuccess } = productReviewSave;
   const dispatch = useDispatch();
   
-  
+  let bullets = document.querySelectorAll('.awssld__bullets button')
 
   useEffect(() => {
+   
+
     if (productSaveSuccess) {
       alert("Review submitted successfully.");
       setRating(0);
@@ -65,13 +67,28 @@ function ProductScreen(props) {
               <AwesomeSlider className="aws-button">
                 {/*   Map over product.image array and add divs according.*/}
                 {/* This array is reversed to match thumbnail */ }
-                {product.images? product.images.reverse().map((image,index) => (
-                  <div data-src={image}></div>
-                )) :( null
+               
+                {product.images? product.images.reverse().map((image,index) => {
+                
+                bullets.forEach(bullet => {
+                  if(index==0)
+                  {
+                    // Do nothing so "active" button shows.
+                  }
+                  else {
+                  console.log(bullets[index].setAttribute("style",`background-image:url(${image} `))
+                  }
+                })
+                  
+                  
+                 return (
+                  
+                  <div data-src={image}></div> 
+                )}) :( null
                 )}
               
-              
               </AwesomeSlider>
+              
               </div>
             </div>
             <div className="details-info">
