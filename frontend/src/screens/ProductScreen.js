@@ -7,7 +7,7 @@ import { PRODUCT_REVIEW_SAVE_RESET } from "../constants/productConstants";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 
-function ProductScreen(props) {
+ function ProductScreen(props) {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -18,12 +18,15 @@ function ProductScreen(props) {
   const productReviewSave = useSelector((state) => state.productReviewSave);
   const { success: productSaveSuccess } = productReviewSave;
   const dispatch = useDispatch();
-  
-  let bullets = document.querySelectorAll('.awssld__bullets button')
 
+ 
+  
+  // let bullets = document.querySelectorAll('.awssld__bullets button')
+  // bullets[index].setAttribute("style",`background-image:url(${image})`);
+ 
   useEffect(() => {
    
-
+    
     if (productSaveSuccess) {
       alert("Review submitted successfully.");
       setRating(0);
@@ -31,8 +34,9 @@ function ProductScreen(props) {
       dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
     }
     dispatch(detailsProduct(props.match.params.id));
+    
     return () => {
-      //
+     
     };
   }, [productSaveSuccess]);
   const submitHandler = (e) => {
@@ -45,6 +49,7 @@ function ProductScreen(props) {
         comment: comment,
       })
     );
+ 
   };
   const handleAddToCart = async () => {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
@@ -68,22 +73,15 @@ function ProductScreen(props) {
                 {/*   Map over product.image array and add divs according.*/}
                 {/* This array is reversed to match thumbnail */ }
                
+
                 {product.images? product.images.reverse().map((image,index) => {
                 
-                bullets.forEach(bullet => {
-                  if(index==0)
-                  {
-                    // Do nothing so "active" button shows.
-                  }
-                  else {
-                  console.log(bullets[index].setAttribute("style",`background-image:url(${image} `))
-                  }
-                })
-                  
-                  
+                
+                  // setBullets(image,index);
+                   
                  return (
                   
-                  <div data-src={image}></div> 
+                  <div key={index} data-src={image}></div> 
                 )}) :( null
                 )}
               

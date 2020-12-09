@@ -61,11 +61,13 @@
 
 
 .awssld__bullets button{
-    /* background-image: url( 
-    'https://rossvilleraceparts.s3.amazonaws.com/128551029_748555126014644_5309039524081970471_n.jpg');  */
+    /* background-image: url('');  */
    background-size: cover;
 }
 
+.awssld__bullets .awssld__bullets--active  {
+  background-image: none !important;
+}
 
 .details-info {
   padding: 0 0 0 3%;
