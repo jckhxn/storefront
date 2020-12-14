@@ -1,4 +1,11 @@
 # A basic overview of your site.
+
+
+# To Run
+cd backend && npm start
+cd frontend && npm start
+http://localhost:3000/
+
 # Description
 Developed a ecommerce front and backend using React, Express & MongoDB.  Implemented AWS for storing product images, PayPal & Stripe for customer purchases.
 
