@@ -39,7 +39,7 @@ function App () {
      
   },[])
 
-  console.log(productCategories)
+ 
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
   };
