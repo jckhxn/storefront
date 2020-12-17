@@ -20,14 +20,19 @@
     const { success: productSaveSuccess } = productReviewSave;
     const dispatch = useDispatch();
 
-    const bullets = document.querySelectorAll(".awssld__bullets button");
-
     
-    useEffect(() =>
-    {
-      bullets.forEach((bullet,index) => bullet.setAttribute("style",`background-image:url(${product.images[index]})`))
-    });
-  
+    useEffect(() => {
+      let bullets = document.querySelectorAll(".awssld__bullets button");
+      if(product && bullets.length > 0)
+      {
+        bullets.forEach((bullet,i) => {
+          bullet.setAttribute("style",`background-image:url(${product.images[i]})`);
+        })
+      }
+      
+    },[product])
+
+
     useEffect(() => {
     
     
@@ -82,11 +87,13 @@
                 
 
                   {product.images? product.images.reverse().map((image,index) => {
-              
+                      
+                     
 
                   return (
                     
                     <div key={index} data-src={image}></div> 
+                  
                   )}) :( null
                   )}
                 
