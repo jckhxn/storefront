@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { listOrders, deleteOrder } from '../actions/orderActions';
-
+import moment from 'moment';
 function OrdersScreen(props) {
   const orderList = useSelector(state => state.orderList);
   const { loading, orders, error } = orderList;
@@ -11,8 +11,12 @@ function OrdersScreen(props) {
   const { loading: loadingDelete, success: successDelete, error: errorDelete } = orderDelete;
 
   const dispatch = useDispatch();
+  
 
+  
   useEffect(() => {
+
+    
     dispatch(listOrders());
     return () => {
       //
@@ -44,7 +48,7 @@ function OrdersScreen(props) {
           </thead>
           <tbody>
             {orders.map(order => (<tr key={order._id}>
-              <td>{order.createdAt}</td>
+              <td>{moment.utc(order.createdAt).local().format('MM-DD-YYYY HH:mm') }</td>
               <td>{order.user.name}</td>
               <td>{order._id}</td>
               <td>{order.isPaid.toString()}</td>

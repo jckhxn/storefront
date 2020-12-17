@@ -155,8 +155,8 @@ router.post("/create-checkout-session", async (req, res) => {
   //     sessionId: session.id,
   //   });
   // }
-console.log(orderID);
-   
+
+   console.log(description);
  
   const session = await stripe.checkout.sessions.create({
     payment_method_types: process.env.PAYMENT_METHODS.split(", "),

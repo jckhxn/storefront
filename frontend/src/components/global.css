@@ -55,8 +55,8 @@
 /* Dropshadow box. */
 .aws-frm--2hSr {
   display: flex;
-  -webkit-box-shadow: 8px 8px 0 rgba(230,70,97,.30);
-  box-shadow: 8px 8px 0 rgba(230,70,97,.30);
+  -webkit-box-shadow: 8px 8px 10px rgba(230,70,97,.30);
+  box-shadow: 8px 8px 10px rgba(230,70,97,.30);
 }
 
 
