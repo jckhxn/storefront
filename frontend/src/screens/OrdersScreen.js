@@ -48,14 +48,19 @@ function OrdersScreen(props) {
           </thead>
           <tbody>
             {orders.map(order => (<tr key={order._id}>
-              <td>{moment.utc(order.createdAt).local().format('MM-DD-YYYY HH:mm') }</td>
+              <td>{moment.utc(order.createdAt).local().format('MM-DD-YYYY h:mm A') }</td>
               <td>{order.user.name}</td>
               <td>{order._id}</td>
               <td>{order.isPaid.toString()}</td>
               <td>{order.isDelivered.toString()}</td>
               <td>{order.deliveredAt}</td>
               <>
-                <Link to={"/order/" + order._id}  className="button secondary" >Details</Link>
+                <Link to={"/order/" + order._id}  className="button secondary" 
+                style={{backgroundColor:'#ed5f74',
+                color:'white',borderRadius:'6px',
+                border:'0',padding:'12px 16px',fontWeight:'600',
+                cursor:'pointer',transition:'all 0.2s ease',
+                display:'block',width:'50% /2',}}>Details</Link>
                 {' '}
                 <button type="button" onClick={() => deleteHandler(order)} className="button secondary">Delete</button>
               </>

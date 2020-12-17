@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { logout, update } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
-
+import moment from 'moment';
 function ProfileScreen(props) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -105,7 +105,7 @@ function ProfileScreen(props) {
               <tbody>
                 {orders.map(order => <tr key={order._id}>
                   <td>{order._id}</td>
-                  <td>{order.createdAt}</td>
+                  <td>{moment.utc(order.createdAt).local().format('MM-DD-YYYY h:mm A')}</td>
                   <td>{order.totalPrice}</td>
                   <td>{order.isPaid}</td>
                   <td>
