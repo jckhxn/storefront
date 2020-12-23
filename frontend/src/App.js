@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
-import useAlan from './hooks/useAlan';
 import SuccessScreen from './screens/SuccessScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -28,7 +27,7 @@ function App () {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [productCategories, setCategories] = useState([]);
-    // useAlan();
+
   const getProductCategories = async () =>
   {
     const response = fetch('/api/products').then(res => res.json()).then(data => setCategories(data));
