@@ -1,6 +1,7 @@
 # TODO
 
 # Stripe Button needs to be set to Live keys.
+# Product needs to be set.
  
 
 # Send automatic receipts

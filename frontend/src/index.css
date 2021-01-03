@@ -320,6 +320,7 @@ a > .rating > span:last-child {
 }
 .cart-image {
   flex: 1 1;
+  margin-right: 10px;
 }
 .cart-name {
   flex: 8 1;

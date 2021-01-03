@@ -79,19 +79,19 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/createadmin', async (req, res) => {
-  try {
-    const user = new User({
-      name: 'Basir',
-      email: 'admin@example.com',
-      password: '1234',
-      isAdmin: true,
-    });
-    const newUser = await user.save();
-    res.send(newUser);
-  } catch (error) {
-    res.send({ message: error.message });
-  }
-});
+// router.get('/createadmin', async (req, res) => {
+//   try {
+//     const user = new User({
+//       name: 'Basir',
+//       email: 'admin@example.com',
+//       password: '1234',
+//       isAdmin: true,
+//     });
+//     const newUser = await user.save();
+//     res.send(newUser);
+//   } catch (error) {
+//     res.send({ message: error.message });
+//   }
+// });
 
 export default router;
