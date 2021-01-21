@@ -1,8 +1,22 @@
 # TODO
 
+# Integrate Sign In With Apple
+# https://www.npmjs.com/package/apple-signin-auth
+#  https://medium.com/@artyomefremov/add-sign-in-with-apple-button-to-your-website-today-part-1-12ed1444623a
+
+# Get live keys for Stripe, Add Live Product ID to StripeCheckout.js,
+# Set Live Key in productRoute on backend,
+# Set MongoDB in config.js
+# mongodb+srv://jack:112358@rrprods.kmzis.mongodb.net/rrpods?retryWrites=true&w=majority
+
+
+
 # Stripe Button needs to be set to Live keys.
-# Product needs to be set.
- 
+# prod_IhKIHr0C4sggTP - this is used to set cart, live product ID.
+# Set Live Key in productRoute for adding products.
+# Set MongoDB URL for production 
+# Products need to be added.
+
 
 # Send automatic receipts
 

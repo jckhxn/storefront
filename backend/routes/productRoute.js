@@ -3,7 +3,7 @@ import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
-const stripe = require('stripe')('sk_test_51H7QRTAMLmRApP8Rb4oL3ksUsucERoKFOImjUog8lXk3JGJz9nExwlCe2erp2Q4sm0aA8rpjf7OyoImJ4du4EYld00RMsHih1y');
+const stripe = require('stripe')('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');
 
 
 router.get('/', async (req, res) => {
