@@ -5,9 +5,6 @@
 #  https://medium.com/@artyomefremov/add-sign-in-with-apple-button-to-your-website-today-part-1-12ed1444623a
 
 # Get live keys for Stripe, Add Live Product ID to StripeCheckout.js,
-# Set Live Key in productRoute on backend,
-# Set MongoDB in config.js
-# mongodb+srv://jack:112358@rrprods.kmzis.mongodb.net/rrpods?retryWrites=true&w=majority
 
 
 
