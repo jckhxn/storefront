@@ -43,13 +43,13 @@ router.put('/:id', isAuth, async (req, res) => {
 router.post('/signin', async (req, res) => {
 
   const signinUser = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
+    email: req.body.email
   });
   if (signinUser) {
-     console.log(signinUser.password + ' ' + req.body.password);
+    
     if (bcrypt.compareSync(req.body.password, signinUser.password)) 
     {
+      console.log("hash true")
     res.send({
       _id: signinUser.id,
       name: signinUser.name,
@@ -58,12 +58,12 @@ router.post('/signin', async (req, res) => {
       coupon:signinUser.coupon,
       token: getToken(signinUser),
     });
-    console.log(signinUser);
-    return;
+   return;
   }
-  } else {
+ }
+
     res.status(401).send({ message: 'Invalid Email or Password.' });
-  }
+  
 });
 
 router.post('/register', async (req, res) => {
