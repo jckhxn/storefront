@@ -11,7 +11,7 @@ export default {
   PAYPAL_CLIENT_ID:
     process.env.PAYPAL_CLIENT_ID ||
     "AXj_EpQRv_1Vl5Uqrw_Aofe_OHXwAhU43qg2h3oVZWh8s1bQmftYu_V5-VQOnkQ63CGDh173zsEC9D5V",
-  accessKeyId: process.env.accessKeyId || "",
+  accessKeyId: process.env.accessKeyId || "AKIAIWGY4P4THKFZULMQ",
   secretAccessKey:
     process.env.secretAccessKey || "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",
 };
