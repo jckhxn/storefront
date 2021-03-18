@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 
 dotenv.config();
-
+// I set these in the Heroku instance
+//  for AWS
 export default {
   PORT: process.env.PORT || 5000,
   MONGODB_URL:
@@ -11,7 +12,6 @@ export default {
   PAYPAL_CLIENT_ID:
     process.env.PAYPAL_CLIENT_ID ||
     "AXj_EpQRv_1Vl5Uqrw_Aofe_OHXwAhU43qg2h3oVZWh8s1bQmftYu_V5-VQOnkQ63CGDh173zsEC9D5V",
-  accessKeyId: process.env.accessKeyId || "AKIAYGSAS5B36H2EYPWY",
-  secretAccessKey:
-    process.env.secretAccessKey || "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",
+  accessKeyId: process.env.accessKeyId || "",
+  secretAccessKey: process.env.secretAccessKey || "",
 };
