@@ -16,7 +16,7 @@ const fetchPriceID = async (totalPrice) => {
     body: JSON.stringify({
       unitAmount: totalPrice,
       currency: "usd",
-      product: process.env.productID,
+      product: "prod_IhKIHr0C4sggTP",
     }),
   });
   return response.json();
