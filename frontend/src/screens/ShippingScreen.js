@@ -7,7 +7,7 @@ require('dotenv').config()
 const USPS = require('usps-webtools');
 const usps = new USPS({
   server: 'http://production.shippingapis.com/ShippingAPI.dll',
-  userId: process.env.USPS_ID,
+  userId: "973HIXON1037",
   ttl: 10000 //TTL in milliseconds for request
 });
 
