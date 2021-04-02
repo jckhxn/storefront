@@ -7,7 +7,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 const USPS = require('usps-webtools');
 const usps = new USPS({
   server: 'http://production.shippingapis.com/ShippingAPI.dll',
-  userId: process.env.USPS_ID ,
+  userId: process.env.USPS_ID,
   ttl: 10000 //TTL in milliseconds for request
 });
 
