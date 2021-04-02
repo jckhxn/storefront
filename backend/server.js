@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import config from './config';
@@ -7,7 +6,7 @@ import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
 import uploadRoute from './routes/uploadRoute';
-
+const path = require('path')
 const mongodbUrl = config.MONGODB_URL;
 mongoose
   .connect(mongodbUrl, {
@@ -33,6 +32,7 @@ app.use(express.static(path.join(__dirname, '/../frontend/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
 });
+
 
 app.listen(config.PORT, () => {
   console.log('Server started at http://localhost:5000');
