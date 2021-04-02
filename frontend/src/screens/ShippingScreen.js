@@ -6,7 +6,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 require('dotenv').config()
 const USPS = require('usps-webtools');
 const usps = new USPS({
-  server: 'http://production.shippingapis.com/ShippingAPI.dll',
+  server: 'https://production.shippingapis.com/ShippingAPI.dll',
   userId: "973HIXON1037",
   ttl: 10000 //TTL in milliseconds for request
 });
@@ -43,23 +43,23 @@ function ShippingScreen(props) {
     e.preventDefault();
   
 // Cant use without SSL on backend
-// usps.verify({
-//   street1: address,
-//   city,
-//   state,
-//   zip:postalCode
-// }, function(err, address) {
-//     if(err)
-//     {
-//       // Threw an address error 
-//     document.getElementById("error").innerText = err.message
-// }
-//    else {
+usps.verify({
+  street1: address,
+  city,
+  state,
+  zip:postalCode
+}, function(err, address) {
+    if(err)
+    {
+      // Threw an address error 
+    document.getElementById("error").innerText = err.message
+}
+   else {
+     dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
+     props.history.push('payment');
      
-//   }
-// });
-  dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
-  props.history.push('payment');
+  }
+});
 
     
   
