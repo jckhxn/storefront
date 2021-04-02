@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveShipping } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
-
+require('dotenv'.config());
 const USPS = require('usps-webtools');
 const usps = new USPS({
   server: 'http://production.shippingapis.com/ShippingAPI.dll',
