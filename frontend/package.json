@@ -25,7 +25,8 @@
     "react-scripts": "^4.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "stripe": "^8.119.0"
+    "stripe": "^8.119.0",
+    "usps-webtools": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
