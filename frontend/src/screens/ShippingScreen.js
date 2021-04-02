@@ -42,24 +42,24 @@ function ShippingScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
   
-
-usps.verify({
-  street1: address,
-  city,
-  state,
-  zip:postalCode
-}, function(err, address) {
-    if(err)
-    {
-      // Threw an address error 
-    document.getElementById("error").innerText = err.message
-}
-   else {
-     dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
-     props.history.push('payment');
-      
-   }
-});
+// Cant use without SSL on backend
+// usps.verify({
+//   street1: address,
+//   city,
+//   state,
+//   zip:postalCode
+// }, function(err, address) {
+//     if(err)
+//     {
+//       // Threw an address error 
+//     document.getElementById("error").innerText = err.message
+// }
+//    else {
+     
+//   }
+// });
+  dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
+  props.history.push('payment');
 
     
   
