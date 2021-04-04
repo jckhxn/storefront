@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveShipping } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
-
+require('dotenv').config()
+const USPS = require('usps-webtools');
+const usps = new USPS({
+  server: 'https://production.shippingapis.com/ShippingAPI.dll',
+  userId: "973HIXON1037",
+  ttl: 10000 //TTL in milliseconds for request
+});
 
 
 
@@ -35,9 +41,26 @@ function ShippingScreen(props) {
   }
   const submitHandler = (e) => {
     e.preventDefault();
-    
-    dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
-    props.history.push('payment');
+  
+// Cant use without SSL on backend
+usps.verify({
+  street1: address,
+  city,
+  state,
+  zip:postalCode
+}, function(err, address) {
+    if(err)
+    {
+      // Threw an address error 
+    document.getElementById("error").innerText = err.message
+}
+   else {
+     dispatch(saveShipping({ address, city,state, postalCode, country , contact}));
+     props.history.push('payment');
+     
+  }
+});
+
     
   
   }
@@ -45,7 +68,7 @@ function ShippingScreen(props) {
  
   return <div>
 
-  
+    
     <CheckoutSteps step1 step2 ></CheckoutSteps>
     <div className="form">
       <form onSubmit={submitHandler}>
@@ -53,6 +76,7 @@ function ShippingScreen(props) {
         {cart.shipping.address === "" ? <button onClick={resetAddress}>Edit Address </button>  : null }
           <li>
             <h2>Shipping</h2>
+            <h5 id="error"> </h5>
           </li>
 
           <li>
