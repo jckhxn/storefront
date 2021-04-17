@@ -51,8 +51,6 @@ function ShippingScreen(props) {
           // Threw an address error
           document.getElementById("error").innerText = err.message;
         } else {
-          console.log(`Success: \n 
-          ${address}`);
           dispatch(
             saveShipping({ address, city, state, postalCode, country, contact })
           );
@@ -68,9 +66,12 @@ function ShippingScreen(props) {
       <div className="form">
         <form onSubmit={submitHandler}>
           <ul className="form-container">
-            {cart.shipping.address === "" ? (
-              <button onClick={resetAddress}>Edit Address </button>
-            ) : null}
+            {console.log(cart.shipping)}
+            {cart.shipping.address ? (
+              <button onClick={resetAddress}>Edit</button>
+            ) : (
+              ""
+            )}
             <li>
               <h2>Shipping</h2>
               <h5 id="error"> </h5>
