@@ -46,11 +46,13 @@ function ShippingScreen(props) {
         state,
         zip: postalCode,
       },
-      function (err, address) {
+      function (err, verifiedAddress) {
         if (err) {
           // Threw an address error
           document.getElementById("error").innerText = err.message;
         } else {
+          console.log(`Success: \n 
+          ${address}`);
           dispatch(
             saveShipping({ address, city, state, postalCode, country, contact })
           );
