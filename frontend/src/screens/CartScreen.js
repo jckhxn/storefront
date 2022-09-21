@@ -41,7 +41,6 @@ function CartScreen(props) {
             <div>Cart is empty</div>
           ) : (
             cartItems.map((item, index) => (
-              
               <li key={index}>
                 <div className="cart-image">
                   <img src={item.image} alt="product" />

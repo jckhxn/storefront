@@ -27,7 +27,7 @@ function App() {
   const [productCategories, setCategories] = useState([]);
 
   const getProductCategories = async () => {
-    const response = fetch("/api/products")
+    const response = fetch("https://api.jackhixon.com/api/storefront/products")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   };
