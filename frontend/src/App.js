@@ -20,20 +20,21 @@ import UsersScreen from "./screens/UsersScreen";
 import StripeScreen from "./screens/StripeScreen";
 import { logout } from "../../frontend/src/actions/userActions";
 import header from "./img/header.jpg";
-
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const [productCategories, setCategories] = useState([]);
 
-  const getProductCategories = async () => {
-    const response = fetch("https://api.jackhixon.com/api/storefront/products")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  };
-  useEffect(() => {
-    getProductCategories();
-  }, []);
+  // const getProductCategories = async () => {
+  //   const response = fetch("https://api.jackhixon.com/api/storefront/products")
+  //     .then((res) => res.json())
+  //     .then((data) => setCategories(data));
+  // };
+  // useEffect(() => {
+  //   getProductCategories();
+  // }, []);
 
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
@@ -43,18 +44,20 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <div className="logo-class">
+      {/* This here be the logo */}
+      {/* <div className="logo-class">
         <Link to="/">
           {" "}
           <img src={header} alt=""></img>
         </Link>
-      </div>
+      </div> */}
       <div className="grid-container">
-        <header className="header">
+        <header className="header ">
           <div className="brand">
             {/* <button onClick={openMenu}>&#9776;</button> */}
           </div>
-          <div className="header-links">
+          <div className="header-links ">
+            <NavBar />
             <a href="/cart">Cart</a>
             {userInfo ? (
               <div className="dropdown">
@@ -67,7 +70,7 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signin"></Link>
             )}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
@@ -119,8 +122,8 @@ function App() {
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>
-
-        <footer className="footer">All rights reserved.</footer>
+        <Footer />
+        {/* <footer className="footer">All rights reserved.</footer> */}
       </div>
     </BrowserRouter>
   );

@@ -12,7 +12,7 @@ const addItem = (productId, qty) => async (dispatch, getState) => {
   //  When adding cart, get price ID and quanity and add to Redux state
   try {
     const response = await fetch(
-      "https://storefront.jackhixon.com/api/storefront/orders/price",
+      "https://api.jackhixon.com/api/storefront/orders/price",
       {
         method: "POST",
         headers: {
@@ -40,7 +40,7 @@ const addItem = (productId, qty) => async (dispatch, getState) => {
 const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
     const { data } = await Axios.get(
-      "https://storefront.jackhixon.com/api/storefront/products/" + productId
+      "https://api.jackhixon.com/api/storefront/" + productId
     );
     dispatch({
       type: CART_ADD_ITEM,

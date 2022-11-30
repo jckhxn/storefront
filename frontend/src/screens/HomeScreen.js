@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Rating from "../components/Rating";
 import { Product } from "../components/Product";
+import CustomButton from "../components/CustomButton";
+
 function HomeScreen(props) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -35,21 +37,21 @@ function HomeScreen(props) {
       <ul className="filter">
         <li>
           <form onSubmit={submitHandler}>
-            <input
+            {/* Logic for searches, add to NavBar */}
+            {/* <input
               name="searchKeyword"
               onChange={(e) => setSearchKeyword(e.target.value)}
-            />
-            <button type="submit">Search</button>
+            /> */}
           </form>
         </li>
-        <li>
+        {/* <li>
           Sort By{" "}
           <select name="sortOrder" onChange={sortHandler}>
             <option value="">Newest</option>
             <option value="lowest">Lowest</option>
             <option value="highest">Highest</option>
           </select>
-        </li>
+        </li> */}
       </ul>
 
       {loading ? (
