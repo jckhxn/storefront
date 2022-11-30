@@ -10,12 +10,14 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import ToysIcon from "@mui/icons-material/Toys";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Link from "@mui/material/Link";
+
+import { Link } from "react-router-dom";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -98,15 +100,15 @@ export default function NavBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link href="cart" underline="none" color="inherit">
+        {/* <Link href="cart" underline="none" color="inherit">
           Cart
-        </Link>
+        </Link> */}
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         {" "}
-        <Link href="profile" underline="none" color="inherit">
+        {/* <Link href="profile" underline="none" color="inherit">
           My Account
-        </Link>
+        </Link> */}
       </MenuItem>
     </Menu>
   );
@@ -131,7 +133,7 @@ export default function NavBar() {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
-            <MailIcon />
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -174,7 +176,7 @@ export default function NavBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <ToysIcon />
           </IconButton>
           <Typography
             variant="h6"
@@ -201,30 +203,24 @@ export default function NavBar() {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              component={Link}
+              to="/cart"
             >
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              component={Link}
+              to="/signin"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              {/* Need to render based on if user is logged in */}
+              <Badge color="error">
+                <AccountCircle />
               </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
