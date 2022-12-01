@@ -22,6 +22,7 @@ import { logout } from "../../frontend/src/actions/userActions";
 import header from "./img/header.jpg";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Searchbar from "./components/Searchbar";
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -57,8 +58,9 @@ function App() {
             {/* <button onClick={openMenu}>&#9776;</button> */}
           </div>
           <div className="header-links ">
-            <NavBar />
-            <a href="/cart">Cart</a>
+            {/* <NavBar /> */}
+            <Searchbar />
+
             {userInfo ? (
               <div className="dropdown">
                 <Link to="/profile">{userInfo.name}</Link>
@@ -86,21 +88,6 @@ function App() {
             )}
           </div>
         </header>
-        <aside className="sidebar">
-          <h3>Shopping Categories</h3>
-          <button className="sidebar-close-button" onClick={closeMenu}>
-            x
-          </button>
-          <ul className="categories">
-            <li>
-              <Link to="/category/Testing">Parts</Link>
-            </li>
-
-            <li>
-              <Link to="/category/Description">Other</Link>
-            </li>
-          </ul>
-        </aside>
         <main className="main">
           <div className="content">
             <Route path="/stripe" component={StripeScreen} />

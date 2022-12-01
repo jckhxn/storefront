@@ -34,25 +34,26 @@ function HomeScreen(props) {
     <>
       {category && <h2>{category}</h2>}
 
-      <ul className="filter">
+      {/* <ul className="filter">
         <li>
           <form onSubmit={submitHandler}>
-            {/* Logic for searches, add to NavBar */}
-            {/* <input
-              name="searchKeyword"
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            /> */}
+            {
+              <input
+                name="searchKeyword"
+                onChange={(e) => setSearchKeyword(e.target.value)}
+              />
+            }
           </form>
         </li>
-        {/* <li>
+        <li>
           Sort By{" "}
           <select name="sortOrder" onChange={sortHandler}>
             <option value="">Newest</option>
             <option value="lowest">Lowest</option>
             <option value="highest">Highest</option>
           </select>
-        </li> */}
-      </ul>
+        </li>
+      </ul> */}
 
       {loading ? (
         <div>Loading...</div>
