@@ -23,6 +23,7 @@ import header from "./img/header.jpg";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Searchbar from "./components/Searchbar";
+import CategoriesMenu from "./components/CategoriesMenu";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);

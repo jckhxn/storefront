@@ -2,6 +2,9 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import CategoriesMenu from "./CategoriesMenu";
+import { InputAdornment } from "@mui/material";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -51,10 +54,14 @@ function Searchbar() {
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
+
       <StyledInputBase
         placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
+        inputProps={{
+          "aria-label": "search",
+        }}
       />
+      <CategoriesMenu />
     </Search>
   );
 }

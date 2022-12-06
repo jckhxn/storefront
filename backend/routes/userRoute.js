@@ -1,25 +1,20 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import User from '../models/userModel';
-import { getToken, isAuth, isAdmin } from '../util';
+import express from "express";
+import bcrypt from "bcryptjs";
+import User from "../models/userModel";
+import { getToken, isAuth, isAdmin } from "../util";
 
 const router = express.Router();
 
+router.post("/");
 
-router.post('/')
-
-router.get('/list', async (req,res) => {
+router.get("/list", async (req, res) => {
   const users = await User.find({});
- if(users)
- { 
-  
-   
-  res.send({users})
- }
-  
-  })
+  if (users) {
+    res.send({ users });
+  }
+});
 
-router.put('/:id', isAuth, async (req, res) => {
+router.put("/:id", isAuth, async (req, res) => {
   const userId = req.params.id;
   const user = await User.findById(userId);
   if (user) {
@@ -36,37 +31,33 @@ router.put('/:id', isAuth, async (req, res) => {
       token: getToken(updatedUser),
     });
   } else {
-    res.status(404).send({ message: 'User Not Found' });
+    res.status(404).send({ message: "User Not Found" });
   }
 });
 
-router.post('/signin', async (req, res) => {
-
+router.post("/signin", async (req, res) => {
   const signinUser = await User.findOne({
-    email: req.body.email
+    email: req.body.email,
   });
   if (signinUser) {
-    
-    if (bcrypt.compareSync(req.body.password, signinUser.password)) 
-    {
-      console.log("hash true")
-    res.send({
-      _id: signinUser.id,
-      name: signinUser.name,
-      email: signinUser.email,
-      isAdmin: signinUser.isAdmin,
-      coupon:signinUser.coupon,
-      token: getToken(signinUser),
-    });
-   return;
+    if (bcrypt.compareSync(req.body.password, signinUser.password)) {
+      console.log("hash true");
+      res.send({
+        _id: signinUser.id,
+        name: signinUser.name,
+        email: signinUser.email,
+        isAdmin: signinUser.isAdmin,
+        coupon: signinUser.coupon,
+        token: getToken(signinUser),
+      });
+      return;
+    }
   }
- }
 
-    res.status(401).send({ message: 'Invalid Email or Password.' });
-  
+  res.status(401).send({ message: "Invalid Email or Password." });
 });
 
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -82,7 +73,7 @@ router.post('/register', async (req, res) => {
       token: getToken(newUser),
     });
   } else {
-    res.status(401).send({ message: 'Invalid User Data.' });
+    res.status(401).send({ message: "Invalid User Data." });
   }
 });
 
