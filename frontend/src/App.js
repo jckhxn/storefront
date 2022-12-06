@@ -1,6 +1,9 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import "./App.css";
 import SuccessScreen from "./screens/SuccessScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
@@ -24,6 +27,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Searchbar from "./components/Searchbar";
 import CategoriesMenu from "./components/CategoriesMenu";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -62,7 +66,7 @@ function App() {
           <div className="header-links ">
             {/* <NavBar /> */}
             <Searchbar />
-
+            <ProductCard />
             {userInfo ? (
               <div className="dropdown">
                 <Link to="/profile">{userInfo.name}</Link>

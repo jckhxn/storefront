@@ -1,9 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import "./normalize.css";
-import "./global.css";
-
 let priceID;
 
 // Set price based on Cart.
