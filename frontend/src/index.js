@@ -4,10 +4,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import store from "./store";
-
+import { SnackbarProvider, useSnackbar } from "notistack";
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <SnackbarProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </SnackbarProvider>,
   document.getElementById("root")
 );

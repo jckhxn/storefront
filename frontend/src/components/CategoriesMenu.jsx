@@ -74,7 +74,10 @@ export default function CategoriesMenu() {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ color: "#4B566B", backgroundColor: "#F6F9FC" }}
+        sx={{
+          color: "#4B566B",
+          backgroundColor: "#F6F9FC",
+        }}
       >
         All Categories
       </Button>

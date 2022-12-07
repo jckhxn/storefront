@@ -14,6 +14,8 @@ import Grid from "@mui/material/Grid";
 
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import { useSnackbar } from "notistack";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -29,65 +31,85 @@ const ExpandMore = styled((props) => {
 export default function ProductCard() {
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    // Add to cart, slide in remove item button, display quantity in cart icon & between icon
-    // Display toast notif of add to cart
+  const { enqueueSnackbar } = useSnackbar();
+  const handleClick = () => {
+    // Add to cart, display remove item button based on state
+    // display quantity in cart icon & between icon
+
+    enqueueSnackbar("Item added to cart", { variant: "success" });
+    enqueueSnackbar("Item removed from cart", { variant: "error" });
     setExpanded(!expanded);
   };
 
   return (
-    <Box>
-      <Card sx={{ maxWidth: 382 }}>
-        <CardMedia
-          component="img"
-          height="382"
-          src="https://images.unsplash.com/photo-1669724436791-8ddf7a9d2282?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-          alt="Product Image"
-        />
+    <>
+      <Box>
+        <Card sx={{ maxWidth: 382 }}>
+          <CardMedia
+            component="img"
+            height="382"
+            src="https://images.unsplash.com/photo-1669724436791-8ddf7a9d2282?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            alt="Product Image"
+          />
 
-        <CardContent>
-          <Box>
-            <Typography variant="subtitle1" component="h2" color="text.priamry">
-              Example Product
-            </Typography>
-          </Box>
-          {/* Maybe we fake this? */}
-          <Box>
-            <Rating name="read-only" value={3} readOnly />
-          </Box>
-          {/* Price */}
-
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            <Grid item xs={4}>
-              <Typography variant="h10" color="rgb(210,63,87)">
-                $4.99
+          <CardContent>
+            <Box>
+              <Typography
+                variant="subtitle1"
+                component="h2"
+                color="text.priamry"
+              >
+                Example Product
               </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <CardActions>
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="add to cart"
-                >
-                  <AddBoxOutlinedIcon
+            </Box>
+            {/* Maybe we fake this? */}
+            <Box>
+              <Rating name="read-only" value={3} readOnly />
+            </Box>
+            {/* Price */}
+
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
+            >
+              <Grid item xs={4}>
+                <Typography variant="h10" color="rgb(210,63,87)">
+                  $4.99
+                </Typography>
+              </Grid>
+
+              <Grid item xs={8}>
+                <CardActions>
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleClick}
+                    aria-expanded={expanded}
+                    aria-label="add to cart"
+                  >
+                    <AddBoxOutlinedIcon
+                      sx={{
+                        fontSize: 32,
+                        color: "rgb(210,63,87)",
+                      }}
+                    />
+                    {/* Display quantity selected    */}
+                  </ExpandMore>
+                  {/* Show only if item is in cart */}
+                  {/* <RemoveOutlinedIcon
                     sx={{
                       fontSize: 32,
                       color: "rgb(210,63,87)",
+                      border: 2,
                     }}
-                  />
-                </ExpandMore>
-              </CardActions>
+                  /> */}
+                </CardActions>
+              </Grid>
             </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-    </Box>
+          </CardContent>
+        </Card>
+      </Box>
+    </>
   );
 }

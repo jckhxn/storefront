@@ -3,7 +3,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import CategoriesMenu from "./CategoriesMenu";
-import { InputAdornment } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -34,7 +33,7 @@ const StyledInputBase = styled(OutlinedInput)(({ theme }) => ({
   color: "black",
   borderRadius: "16px",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 9, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
@@ -60,8 +59,9 @@ function Searchbar() {
         inputProps={{
           "aria-label": "search",
         }}
+        sx={{ margin: 0, paddingRight: 0 }}
+        endAdornment={<CategoriesMenu />}
       />
-      <CategoriesMenu />
     </Search>
   );
 }
