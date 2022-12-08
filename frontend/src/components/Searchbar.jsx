@@ -3,14 +3,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import CategoriesMenu from "./CategoriesMenu";
+import Divider from "@mui/material/Divider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -40,9 +38,6 @@ const StyledInputBase = styled(OutlinedInput)(({ theme }) => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
     },
   },
 }));
@@ -60,7 +55,12 @@ function Searchbar() {
           "aria-label": "search",
         }}
         sx={{ margin: 0, paddingRight: 0 }}
-        endAdornment={<CategoriesMenu />}
+        endAdornment={
+          <>
+            <Divider orientation="vertical" flexItem />
+            <CategoriesMenu />
+          </>
+        }
       />
     </Search>
   );

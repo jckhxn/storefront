@@ -9,7 +9,6 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -43,12 +42,6 @@ const StyledMenu = styled((props) => (
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(1.5),
       },
-      "&:active": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
-      },
     },
   },
 }));
@@ -77,6 +70,11 @@ export default function CategoriesMenu() {
         sx={{
           color: "#4B566B",
           backgroundColor: "#F6F9FC",
+          textTransform: "none",
+          fontWeight: "light",
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
         }}
       >
         All Categories
