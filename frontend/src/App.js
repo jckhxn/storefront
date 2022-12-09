@@ -23,9 +23,8 @@ import UsersScreen from "./screens/UsersScreen";
 import StripeScreen from "./screens/StripeScreen";
 import { logout } from "../../frontend/src/actions/userActions";
 import header from "./img/header.jpg";
-import { NavBar } from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import Searchbar from "./components/Searchbar";
 
 import ProductCard from "./components/ProductCard";
 
