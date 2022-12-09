@@ -10,7 +10,7 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -188,21 +188,22 @@ export default function NavBar() {
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
-              color="gray"
+              sx={{ backgroundColor: "#F3F5F9" }}
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={0} color="error">
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              aria-label="show 17 new notifications"
+              sx={{ backgroundColor: "#F3F5F9" }}
             >
-              <AccountCircle />
+              <Badge badgeContent={17} color="error">
+                <AccountCircle />
+              </Badge>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

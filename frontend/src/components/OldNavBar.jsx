@@ -26,7 +26,12 @@ export const NavBar = () => {
           Rosville Race Products
         </Typography>
         <Searchbar />
-        <IconButton size="large" edge="end" aria-label="logo">
+        <IconButton
+          size="large"
+          edge="end"
+          aria-label="logo"
+          sx={{ backgroundColor: "blue" }}
+        >
           <PersonOutlineOutlinedIcon />
         </IconButton>
         <IconButton size="large" edge="end" aria-label="logo">
