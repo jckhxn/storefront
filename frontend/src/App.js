@@ -23,10 +23,10 @@ import UsersScreen from "./screens/UsersScreen";
 import StripeScreen from "./screens/StripeScreen";
 import { logout } from "../../frontend/src/actions/userActions";
 import header from "./img/header.jpg";
-import NavBar from "./components/NavBar";
+import { NavBar } from "./components/NavBar";
 import Footer from "./components/Footer";
 import Searchbar from "./components/Searchbar";
-import CategoriesMenu from "./components/CategoriesMenu";
+
 import ProductCard from "./components/ProductCard";
 
 function App() {
@@ -64,9 +64,8 @@ function App() {
             {/* <button onClick={openMenu}>&#9776;</button> */}
           </div>
           <div className="header-links ">
-            {/* <NavBar /> */}
-            <Searchbar />
-            <ProductCard />
+            <NavBar />
+
             {userInfo ? (
               <div className="dropdown">
                 <Link to="/profile">{userInfo.name}</Link>
