@@ -26,8 +26,6 @@ import header from "./img/header.jpg";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
-import ProductCard from "./components/ProductCard";
-
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;

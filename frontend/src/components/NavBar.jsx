@@ -1,11 +1,9 @@
 import * as React from "react";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -17,47 +15,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Searchbar from "./Searchbar";
 import ToysIcon from "@mui/icons-material/Toys";
-
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-//   borderRadius: theme.shape.borderRadius,
-//   backgroundColor: alpha(theme.palette.common.white, 0.15),
-//   "&:hover": {
-//     backgroundColor: alpha(theme.palette.common.white, 0.25),
-//   },
-//   marginRight: theme.spacing(2),
-//   marginLeft: 0,
-//   width: "100%",
-//   [theme.breakpoints.up("sm")]: {
-//     marginLeft: theme.spacing(3),
-//     width: "auto",
-//   },
-// }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-// }));
-
+import Stack from "@mui/material/Stack";
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -165,59 +123,53 @@ export default function NavBar() {
           background: "white",
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="gray"
-          >
-            <ToysIcon />
-          </IconButton>
-          <Typography
-            color="black"
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Rossville Race Parts
-          </Typography>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Stack direction="row" alignItems="center">
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="gray"
+            >
+              <ToysIcon />
+            </IconButton>
+            <Typography
+              color="black"
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              Rossville Race Parts
+            </Typography>
+          </Stack>
           <Searchbar />
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Stack direction="row" spacing={4}>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               sx={{ backgroundColor: "#F3F5F9" }}
+              edge="end"
             >
               <Badge badgeContent={0} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
+              edge="end"
               sx={{ backgroundColor: "#F3F5F9" }}
             >
               <Badge badgeContent={17} color="error">
                 <AccountCircle />
               </Badge>
             </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
+          </Stack>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
