@@ -15,7 +15,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Searchbar from "./Searchbar";
 import ToysIcon from "@mui/icons-material/Toys";
+import logo from "../img/logo.svg";
 import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -129,22 +131,21 @@ export default function NavBar() {
           }}
         >
           <Stack direction="row" alignItems="center">
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="gray"
-            >
-              <ToysIcon />
-            </IconButton>
-            <Typography
+            {/* <Typography
               color="black"
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block" },
+              }}
             >
               Rossville Race Parts
-            </Typography>
+            </Typography> */}
+            <Link href="/">
+              <Box component="img" sx={{ height: 60 }} alt="Logo" src={logo} />
+            </Link>
           </Stack>
           <Searchbar />
           <Stack direction="row" spacing={4}>
