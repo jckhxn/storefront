@@ -5,10 +5,13 @@ import "./index.css";
 import App from "./App";
 import store from "./store";
 import { SnackbarProvider } from "notistack";
+import { Layout } from "./components/Layout";
 ReactDOM.render(
   <SnackbarProvider>
     <Provider store={store}>
-      <App />
+      <Layout>
+        <App />
+      </Layout>
     </Provider>
   </SnackbarProvider>,
   document.getElementById("root")

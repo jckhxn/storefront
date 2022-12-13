@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import Rating from "../components/Rating";
-import { Product } from "../components/Product";
-import CustomButton from "../components/CustomButton";
-
+import Grid from "@mui/material/Grid";
+import ProductCard from "../components/ProductCard";
 function HomeScreen(props) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -60,32 +58,15 @@ function HomeScreen(props) {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <ul className="products">
+        <Grid container spacing={2}>
           {products.map((product) => (
-            <li key={product._id}>
-              <div className="product">
-                <Link to={"/product/" + product._id}>
-                  <img
-                    className="product-image"
-                    src={product.image}
-                    alt="product"
-                  />
-                </Link>
-                <div className="product-name">
-                  <Link to={"/product/" + product._id}>{product.name}</Link>
-                </div>
-                <div className="product-brand">{product.brand}</div>
-                <div className="product-price">${product.price}</div>
-                <div className="product-rating">
-                  <Rating
-                    value={product.rating}
-                    text={product.numReviews + " reviews"}
-                  />
-                </div>
-              </div>
-            </li>
+            <ProductCard
+              image={product.image}
+              name={product.name}
+              price={product.price}
+            />
           ))}
-        </ul>
+        </Grid>
       )}
     </>
   );

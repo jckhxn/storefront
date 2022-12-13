@@ -22,9 +22,6 @@ import OrdersScreen from "./screens/OrdersScreen";
 import UsersScreen from "./screens/UsersScreen";
 import StripeScreen from "./screens/StripeScreen";
 import { logout } from "../../frontend/src/actions/userActions";
-import header from "./img/header.jpg";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -48,21 +45,12 @@ function App() {
   };
   return (
     <BrowserRouter>
-      {/* This here be the logo */}
-      {/* <div className="logo-class">
-        <Link to="/">
-          {" "}
-          <img src={header} alt=""></img>
-        </Link>
-      </div> */}
       <div className="grid-container">
         <header className="header ">
           <div className="brand">
             {/* <button onClick={openMenu}>&#9776;</button> */}
           </div>
           <div className="header-links ">
-            <NavBar />
-
             {userInfo ? (
               <div className="dropdown">
                 <Link to="/profile">{userInfo.name}</Link>
@@ -111,8 +99,6 @@ function App() {
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>
-        <Footer />
-        {/* <footer className="footer">All rights reserved.</footer> */}
       </div>
     </BrowserRouter>
   );

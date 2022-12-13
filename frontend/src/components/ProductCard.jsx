@@ -1,20 +1,15 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import Grid from "@mui/material/Grid";
-
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import { useSnackbar } from "notistack";
 
 const ExpandMore = styled((props) => {
@@ -28,7 +23,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ProductCard() {
+export default function ProductCard({ image, name, price }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -43,73 +38,74 @@ export default function ProductCard() {
 
   return (
     <>
-      <Box>
-        <Card sx={{ maxWidth: 382 }}>
-          <CardMedia
-            component="img"
-            height="382"
-            src="https://images.unsplash.com/photo-1669724436791-8ddf7a9d2282?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="Product Image"
-          />
+      <Grid item xs={3}>
+        <Box>
+          <Card sx={{ maxWidth: 334 }}>
+            <CardMedia
+              component="img"
+              height="382"
+              src={image}
+              alt="Product Image"
+            />
 
-          <CardContent>
-            <Box>
-              <Typography
-                variant="subtitle1"
-                component="h2"
-                color="text.priamry"
-              >
-                Example Product
-              </Typography>
-            </Box>
-            {/* Maybe we fake this? */}
-            <Box>
-              <Rating name="read-only" value={3} readOnly />
-            </Box>
-            {/* Price */}
-
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-start"
-              alignItems="center"
-            >
-              <Grid item xs={4}>
-                <Typography variant="h10" color="rgb(210,63,87)">
-                  $4.99
+            <CardContent>
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  component="h2"
+                  color="text.priamry"
+                >
+                  {name}
                 </Typography>
-              </Grid>
+              </Box>
 
-              <Grid item xs={8}>
-                <CardActions>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleClick}
-                    aria-expanded={expanded}
-                    aria-label="add to cart"
-                  >
-                    <AddBoxOutlinedIcon
-                      sx={{
-                        fontSize: 32,
-                        color: "rgb(210,63,87)",
-                      }}
-                    />
-                    {/* Display quantity selected    */}
-                  </ExpandMore>
-                  {/* Show only if item is in cart */}
-                  {/* <RemoveOutlinedIcon
+              <Box>
+                <Rating name="read-only" value={3} readOnly />
+              </Box>
+
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Grid item xs={4}>
+                  <Typography variant="h10" color="rgb(210,63,87)">
+                    ${price}
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={8}>
+                  <CardActions>
+                    <ExpandMore
+                      expand={expanded}
+                      onClick={handleClick}
+                      aria-expanded={expanded}
+                      aria-label="add to cart"
+                    >
+                      <AddBoxOutlinedIcon
+                        sx={{
+                          fontSize: 32,
+                          color: "rgb(210,63,87)",
+                        }}
+                      />
+                      {/* Display quantity selected    */}
+                    </ExpandMore>
+                    {/* Show only if item is in cart */}
+                    {/* <RemoveOutlinedIcon
                     sx={{
                       fontSize: 32,
                       color: "rgb(210,63,87)",
                       border: 2,
                     }}
                   /> */}
-                </CardActions>
+                  </CardActions>
+                </Grid>
               </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-      </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Grid>
     </>
   );
 }
