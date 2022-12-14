@@ -147,7 +147,7 @@ export default function NavBar() {
           <Stack direction="row" spacing={4}>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show shopping cart"
               sx={{ backgroundColor: "#F3F5F9" }}
               edge="end"
             >
@@ -158,11 +158,11 @@ export default function NavBar() {
 
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show profile"
               edge="end"
               sx={{ backgroundColor: "#F3F5F9" }}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={0} color="error">
                 <AccountCircle />
               </Badge>
             </IconButton>

@@ -40,13 +40,8 @@ export default function ProductCard({ image, name, price }) {
     <>
       <Grid item xs={3}>
         <Box>
-          <Card sx={{ maxWidth: 334 }}>
-            <CardMedia
-              component="img"
-              height="382"
-              src={image}
-              alt="Product Image"
-            />
+          <Card>
+            <CardMedia component="img" src={image} alt="Product Image" />
 
             <CardContent>
               <Box>
