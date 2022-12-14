@@ -22,6 +22,7 @@ import OrdersScreen from "./screens/OrdersScreen";
 import UsersScreen from "./screens/UsersScreen";
 import StripeScreen from "./screens/StripeScreen";
 import { logout } from "../../frontend/src/actions/userActions";
+import { ImageGallery } from "./components/ImageGallery";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -51,6 +52,7 @@ function App() {
             {/* <button onClick={openMenu}>&#9776;</button> */}
           </div>
           <div className="header-links ">
+            <ImageGallery />
             {userInfo ? (
               <div className="dropdown">
                 <Link to="/profile">{userInfo.name}</Link>
